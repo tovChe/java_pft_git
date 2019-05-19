@@ -1,6 +1,6 @@
 package ru.jft.first;
 
-public class first {
+public class First {
 
     public static void main(String[] args) {
 
