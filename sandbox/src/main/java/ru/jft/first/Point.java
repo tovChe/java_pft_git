@@ -2,15 +2,15 @@ package ru.jft.first;
 
 public class Point {
 
-  public double x;
-  public double y;
+  double x;
+  double y;
 
   public Point(double x, double y) {
     this.x = x;
     this.y = y;
   }
 
-  public double getDistance(Point p2) {
-    return Math.sqrt(Math.pow(p2.x - this.x, 2) + Math.pow(p2.y - this.y, 2));
+  public double getDistance(Point p1) {
+    return Math.sqrt(Math.pow(x-p1.x, 2) + Math.pow(y - p1.y, 2));
   }
 }

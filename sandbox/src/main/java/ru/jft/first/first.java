@@ -12,7 +12,7 @@ public class First {
         Point p1 = new Point(10, 10);
         Point p2 = new Point(50, 50);
 
-        System.out.println("Расстояние между точками = " + p1.getDistance(p2));
+        System.out.println("Расстояние между точками = " + p2.getDistance(p1));
     }
 
 
