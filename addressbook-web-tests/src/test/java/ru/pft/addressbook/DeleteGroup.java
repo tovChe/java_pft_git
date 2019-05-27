@@ -20,26 +20,51 @@ public class DeleteGroup {
     wd = new FirefoxDriver();
     wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     wd.get("http://localhost/addressbook");
+    login("admin", "secret");
+  }
+
+  private void login(String username, String password) {
     wd.findElement(By.name("user")).clear();
-    wd.findElement(By.name("user")).sendKeys("admin");
+    wd.findElement(By.name("user")).sendKeys(username);
     wd.findElement(By.name("pass")).clear();
-    wd.findElement(By.name("pass")).sendKeys("secret");
+    wd.findElement(By.name("pass")).sendKeys(password);
     wd.findElement(By.xpath("//input[@value='Login']")).click();
   }
 
   @Test
   public void testDeleteGroup() throws Exception {
 
-    wd.findElement(By.linkText("groups")).click();
-    wd.findElement(By.name("selected[]")).click();
-    wd.findElement(By.name("delete")).click();
+    gotoGroupPage();
+    selectGroup();
+    deleteGroup();
+    returnToGroupPage();
+
+  }
+
+  private void returnToGroupPage() {
     wd.findElement(By.linkText("group page")).click();
-    wd.findElement(By.linkText("Logout")).click();
+  }
+
+  private void deleteGroup() {
+    wd.findElement(By.name("delete")).click();
+  }
+
+  private void selectGroup() {
+    wd.findElement(By.name("selected[]")).click();
+  }
+
+  private void gotoGroupPage() {
+    wd.findElement(By.linkText("groups")).click();
   }
 
   @AfterMethod(alwaysRun = true)
   public void tearDown() throws Exception {
+    logout();
     wd.quit();
+  }
+
+  private void logout() {
+    wd.findElement(By.linkText("Logout")).click();
   }
 
   private boolean isElementPresent(By by) {
