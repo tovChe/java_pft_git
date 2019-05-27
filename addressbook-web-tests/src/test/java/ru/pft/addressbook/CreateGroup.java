@@ -16,11 +16,11 @@ public class CreateGroup {
   public void setUp() throws Exception {
     wd = new FirefoxDriver();
     wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    wd.get("http://localhost/addressbook/");
     login("admin", "secret");
   }
 
   private void login(String name, String password) {
-    wd.get("http://localhost/addressbook/");
     wd.findElement(By.name("user")).clear();
     wd.findElement(By.name("user")).sendKeys(name);
     wd.findElement(By.name("pass")).clear();
@@ -32,9 +32,7 @@ public class CreateGroup {
   public void testCreateGroup() throws Exception {
     wd.findElement(By.linkText("groups")).click();
     createGroup();
-    groupName("Group1");
-    groupHeader("test1");
-    groupFooter("tes2");
+    fillGroupForm("tes2");
     submitForm();
     returnToGroupPage();
   }
@@ -47,17 +45,11 @@ public class CreateGroup {
     wd.findElement(By.name("submit")).click();
   }
 
-  private void groupFooter(String textFooter) {
+  private void fillGroupForm(String textFooter) {
     wd.findElement(By.name("group_footer")).click();
     wd.findElement(By.name("group_footer")).sendKeys(textFooter);
-  }
-
-  private void groupHeader(String textHeader) {
     wd.findElement(By.name("group_header")).click();
     wd.findElement(By.name("group_header")).sendKeys(textHeader);
-  }
-
-  private void groupName(String groupName) {
     wd.findElement(By.name("group_name")).sendKeys(groupName);
   }
 
