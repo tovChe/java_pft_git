@@ -12,6 +12,7 @@ import java.util.concurrent.TimeUnit;
 public class CreateGroup {
   private WebDriver wd;
 
+
   @BeforeMethod(alwaysRun = true)
   public void setUp() throws Exception {
     wd = new FirefoxDriver();
@@ -32,9 +33,18 @@ public class CreateGroup {
   @Test
   public void testCreateGroup() throws Exception {
     createGroup();
-    fillGroupForm("tes2", "test1", "GroupName");
+    fillGroupForm();
     submitForm();
     returnToGroupPage();
+  }
+
+  private void fillGroupForm() {
+    GroupData gdata = new GroupData("Lopar", "Zaverda", "TestGroup Name");
+    wd.findElement(By.name("group_footer")).click();
+    wd.findElement(By.name("group_footer")).sendKeys(gdata.textFooter);
+    wd.findElement(By.name("group_header")).click();
+    wd.findElement(By.name("group_header")).sendKeys(gdata.header);
+    wd.findElement(By.name("group_name")).sendKeys(gdata.groupName);
   }
 
   private void createGroup() {
@@ -42,13 +52,13 @@ public class CreateGroup {
     wd.findElement(By.name("new")).click();
   }
 
-  private void fillGroupForm(String textFooter, String header, String groupName) {
-    wd.findElement(By.name("group_footer")).click();
-    wd.findElement(By.name("group_footer")).sendKeys(textFooter);
-    wd.findElement(By.name("group_header")).click();
-    wd.findElement(By.name("group_header")).sendKeys(header);
-    wd.findElement(By.name("group_name")).sendKeys(groupName);
-  }
+//  private void fillGroupForm(GroupData gdata) {
+//    wd.findElement(By.name("group_footer")).click();
+//    wd.findElement(By.name("group_footer")).sendKeys(gdata.textFooter);
+//    wd.findElement(By.name("group_header")).click();
+//    wd.findElement(By.name("group_header")).sendKeys(gdata.header);
+//    wd.findElement(By.name("group_name")).sendKeys(gdata.groupName);
+//  }
 
   private void submitForm() {
     wd.findElement(By.name("submit")).click();
