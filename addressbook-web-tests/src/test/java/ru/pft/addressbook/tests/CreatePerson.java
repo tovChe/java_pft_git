@@ -1,6 +1,7 @@
-package ru.pft.addressbook;
+package ru.pft.addressbook.tests;
 
 import org.testng.annotations.Test;
+import ru.pft.addressbook.model.PersonData;
 
 public class CreatePerson extends TestBase {
 
