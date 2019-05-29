@@ -6,7 +6,7 @@ public class GroupData {
   public String header;
   public String groupName;
 
-  public GroupData(String header, String textFooter, String groupName){
+  public GroupData(String header, String textFooter, String groupName) {
     this.header = header;
     this.textFooter = textFooter;
     this.groupName = groupName;

@@ -12,6 +12,7 @@ public class ApplicationManager {
 
   WebDriver wd;
 
+  private SessionHelper sessionHelper;
   private NavigationHelper navigationHelper;
   private PersonHelper personHelper;
   private GroupHelper groupHelper;
@@ -23,25 +24,13 @@ public class ApplicationManager {
     groupHelper = new GroupHelper(wd);
     personHelper = new PersonHelper(wd);
     navigationHelper = new NavigationHelper(wd);
-    login("admin", "secret");
-  }
-
-  public void login(String username, String password) {
-    wd.findElement(By.name("user")).clear();
-    wd.findElement(By.name("user")).sendKeys(username);
-    wd.findElement(By.name("pass")).clear();
-    wd.findElement(By.name("pass")).sendKeys(password);
-    wd.findElement(By.xpath("//input[@value='Login']")).click();
-
+    sessionHelper = new SessionHelper(wd);
+    sessionHelper.login("admin", "secret");
   }
 
   public void stop() {
-    logout();
+    sessionHelper.logout();
     wd.quit();
-  }
-
-  public void logout() {
-    wd.findElement(By.linkText("Logout")).click();
   }
 
   private boolean isElementPresent(By by) {
@@ -72,5 +61,9 @@ public class ApplicationManager {
 
   public NavigationHelper getNavigationHelper() {
     return navigationHelper;
+  }
+
+  public SessionHelper getSessionHelper() {
+    return sessionHelper;
   }
 }
