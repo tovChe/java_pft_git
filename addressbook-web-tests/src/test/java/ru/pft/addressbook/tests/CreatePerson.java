@@ -8,10 +8,10 @@ public class CreatePerson extends TestBase {
   @Test
   public void testCreatePerson() {
 
-    app.addNewPerson();
-    app.fillPersonForm(new PersonData("Tester", "Testovoy", "89999999999", "test@test.com"));
-    app.submitForm();
-    app.returnHomePage();
+    app.getPersonHelper().addNewPerson();
+    app.getPersonHelper().fillPersonForm(new PersonData("Tester", "Testovoy", "89999999999", "test@test.com"));
+    app.getNavigationHelper().submitForm();
+    app.getNavigationHelper().returnHomePage();
 
   }
 
