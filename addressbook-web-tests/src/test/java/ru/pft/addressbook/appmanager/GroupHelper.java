@@ -29,4 +29,11 @@ public class GroupHelper extends HelperBase {
     type(By.name("group_name"), groupData.groupName);
   }
 
+  public void editGroup() {
+    click(By.name("edit"));
+  }
+
+  public void updateForm() {
+    click(By.name("update"));
+  }
 }
