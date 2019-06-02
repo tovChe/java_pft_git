@@ -22,4 +22,8 @@ public class PersonHelper extends HelperBase {
     type(By.name("email"), personData.getEmail());
 
   }
+
+  public void editPerson() {
+    click(By.xpath("//img[@alt='Edit']"));
+  }
 }
