@@ -9,6 +9,6 @@ public class DeletePerson extends TestBase {
 
     app.getPersonHelper().selectPerson();
     app.getPersonHelper().deletePerson();
-    app.getPersonHelper().acceptConfirmation("^Delete 1 addresses[\\s\\S]$");
+    
   }
 }

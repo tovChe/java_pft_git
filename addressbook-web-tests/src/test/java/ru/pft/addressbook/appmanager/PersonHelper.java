@@ -30,7 +30,7 @@ public class PersonHelper extends HelperBase {
     click(By.xpath("//img[@alt='Edit']"));
   }
 
-  public void acceptConfirmation(String message) {
+  /*public void acceptConfirmation(String message) {
     assertTrue(closeAlertAndGetItsText().matches(message));
   }
 
@@ -48,11 +48,17 @@ public class PersonHelper extends HelperBase {
     } finally {
       acceptNextAlert = true;
     }
-  }
+  }*/
   public void deletePerson() {
     click(By.xpath("//input[@value='Delete']"));
+    wd.switchTo().alert().accept();
   }
   public void selectPerson() {
     click(By.name("selected[]"));
   }
+
+  public void selectPersonByID(String id){
+    click(By.id(id));
+  }
 }
+
