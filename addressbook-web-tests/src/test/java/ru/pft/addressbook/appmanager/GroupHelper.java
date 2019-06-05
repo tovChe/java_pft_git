@@ -10,9 +10,10 @@ public class GroupHelper extends HelperBase {
     super(wd);
   }
 
-  public void createGroup() {
+  public void createGroup(GroupData groupData) {
     click(By.linkText("groups"));
     click(By.name("new"));
+    fillGroupForm(groupData);
   }
 
   public void deleteGroup() {
@@ -35,5 +36,9 @@ public class GroupHelper extends HelperBase {
 
   public void updateForm() {
     click(By.name("update"));
+  }
+
+  public boolean isThereAGroup() {
+    return isElementPresent(By.name("selected[]"));
   }
 }
