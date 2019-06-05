@@ -68,5 +68,15 @@ public class PersonHelper extends HelperBase {
   public void selectPersonByID(String id) {
     click(By.id(id));
   }
+
+  public boolean isThereAPerson() {
+    return isElementPresent(By.name("selected[]"));
+  }
+
+  public void createPerson(PersonData personData, boolean b) {
+    addNewPerson();
+    fillPersonForm(personData, b);
+    submitForm();
+  }
 }
 

@@ -36,7 +36,7 @@ public class ApplicationManager {
       System.out.println("Use for tests only IE, Chrome, Firefox");
     }
 
-    wd.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+    wd.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     wd.get("http://localhost/addressbook/");
     navigationHelper = new NavigationHelper(wd);
     groupHelper = new GroupHelper(wd);
