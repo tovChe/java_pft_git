@@ -11,9 +11,11 @@ public class GroupHelper extends HelperBase {
   }
 
   public void createGroup(GroupData groupData) {
-    click(By.linkText("groups"));
+    //click(By.linkText("groups"));
     click(By.name("new"));
     fillGroupForm(groupData);
+    submitForm();
+
   }
 
   public void deleteGroup() {
