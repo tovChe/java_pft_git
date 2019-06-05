@@ -9,7 +9,8 @@ public class CreatePerson extends TestBase {
   public void testCreatePerson() {
 
     app.getPersonHelper().addNewPerson();
-    app.getPersonHelper().fillPersonForm(new PersonData("Tester", "Testovoy", "89999999999", "test@test.com"));
+    app.getPersonHelper().fillPersonForm(new PersonData("Tester", "Testovoy",
+            "89999999999", "test@test.com", "Test group name"), true);
     app.getNavigationHelper().submitForm();
     app.getNavigationHelper().returnHomePage();
 

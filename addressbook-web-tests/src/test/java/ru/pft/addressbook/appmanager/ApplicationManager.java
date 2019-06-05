@@ -36,11 +36,11 @@ public class ApplicationManager {
       System.out.println("Use for tests only IE, Chrome, Firefox");
     }
 
-    wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    wd.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
     wd.get("http://localhost/addressbook/");
+    navigationHelper = new NavigationHelper(wd);
     groupHelper = new GroupHelper(wd);
     personHelper = new PersonHelper(wd);
-    navigationHelper = new NavigationHelper(wd);
     sessionHelper = new SessionHelper(wd);
     sessionHelper.login("admin", "secret");
   }
@@ -50,23 +50,6 @@ public class ApplicationManager {
     wd.quit();
   }
 
-  private boolean isElementPresent(By by) {
-    try {
-      wd.findElement(by);
-      return true;
-    } catch (NoSuchElementException e) {
-      return false;
-    }
-  }
-
-  private boolean isAlertPresent() {
-    try {
-      wd.switchTo().alert();
-      return true;
-    } catch (NoAlertPresentException e) {
-      return false;
-    }
-  }
 
   public SessionHelper getSessionHelper() {
     return sessionHelper;

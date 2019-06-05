@@ -3,27 +3,31 @@ package ru.pft.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class NavigationHelper {
-
-  private WebDriver wd;
+public class NavigationHelper extends HelperBase {
 
   public NavigationHelper(WebDriver wd) {
-    this.wd = wd;
-  }
-
-  public void submitForm() {
-    wd.findElement(By.name("submit")).click();
+    super(wd);
   }
 
   public void returnToGroupPage() {
-    wd.findElement(By.linkText("group page")).click();
+    click(By.linkText("group page"));
   }
 
   public void returnHomePage() {
-    wd.findElement(By.linkText("home page")).click();
+
+    if (isElementPresent(By.id("maintable"))){
+      return;
+    }
+    click(By.linkText("home page"));
   }
 
   public void gotoGroupPage() {
-    wd.findElement(By.linkText("groups")).click();
+
+    if (isElementPresent(By.tagName("h1"))
+            && wd.findElement(By.tagName("h1")).getText().equals("Groups")
+            && isElementPresent(By.name("new"))) {
+      return;
+    }
+    click(By.linkText("groups"));
   }
 }

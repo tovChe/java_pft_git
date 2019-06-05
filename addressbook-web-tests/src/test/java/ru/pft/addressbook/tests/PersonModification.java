@@ -9,8 +9,10 @@ public class PersonModification extends TestBase {
   public void personModification() {
 
     app.getPersonHelper().editPerson();
-    app.getPersonHelper().fillPersonForm(new PersonData("Tester Meister", "Lenin", "+79189999999", "tester@yahoooo.com"));
+    app.getPersonHelper().fillPersonForm(new PersonData("Tester Meister", "Lenin",
+            "+79189999999", "tester@yahoooo.com", null), false);
     app.getGroupHelper().updateForm();
+    app.getNavigationHelper().returnHomePage();
 
   }
 }
