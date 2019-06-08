@@ -15,6 +15,10 @@ public class CreatePerson extends TestBase {
       System.out.println("Person was created!!!");
     } else if (app.getPersonHelper().isElementPresent(By.name("selected[]"))) {
       System.out.println("Person existed!!!");
+      app.getPersonHelper().deletePerson();
+      app.getPersonHelper().createPerson(new PersonData("TesterCreated", "Testovoy",
+              "89999999998", "test@test.com", "Test group name"), true);
+      System.out.println("Person was recreated!");
     }
     app.getNavigationHelper().returnHomePage();
   }
