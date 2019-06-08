@@ -12,9 +12,10 @@ public class DeletePerson extends TestBase {
       app.getPersonHelper().createPerson(new PersonData("Tester", "Testovoy",
               "89999999999", "test@test.com", "Test group name"), true);
     }
-    app.getPersonHelper().selectPerson();
+    app.getPersonHelper().selectAll();
     app.getPersonHelper().deletePerson();
     app.getNavigationHelper().returnHomePage();
+    System.out.println("All person deleted!");
 
   }
 }

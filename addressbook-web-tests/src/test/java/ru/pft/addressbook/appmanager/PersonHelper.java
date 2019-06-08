@@ -65,6 +65,10 @@ public class PersonHelper extends HelperBase {
     click(By.name("selected[]"));
   }
 
+  public void selectAll(){
+    click(By.id("MassCB"));
+  }
+
   public void selectPersonByID(String id) {
     click(By.id(id));
   }
