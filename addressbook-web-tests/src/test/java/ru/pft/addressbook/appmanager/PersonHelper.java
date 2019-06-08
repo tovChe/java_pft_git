@@ -73,9 +73,9 @@ public class PersonHelper extends HelperBase {
     return isElementPresent(By.name("selected[]"));
   }
 
-  public void createPerson(PersonData personData, boolean b) {
+  public void createPerson(PersonData personData, boolean existing) {
     addNewPerson();
-    fillPersonForm(personData, b);
+    fillPersonForm(personData, existing);
     submitForm();
   }
 }
