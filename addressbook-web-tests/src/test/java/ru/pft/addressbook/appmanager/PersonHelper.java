@@ -1,6 +1,5 @@
 package ru.pft.addressbook.appmanager;
 
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
@@ -27,7 +26,7 @@ public class PersonHelper extends HelperBase {
     type(By.name("email"), personData.getEmail());
 
     if (creation) {
-      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(personData.getGroupName());
+      new Select(wd.findElement(By.name("new_group")));
     } else {
       Assert.assertFalse(isElementPresent(By.name("new_group")));
     }
@@ -59,13 +58,14 @@ public class PersonHelper extends HelperBase {
   public void deletePerson() {
     click(By.xpath("//input[@value='Delete']"));
     wd.switchTo().alert().accept();
+    click(By.linkText("home"));
   }
 
   public void selectPerson() {
     click(By.name("selected[]"));
   }
 
-  public void selectAll(){
+  public void selectAll() {
     click(By.id("MassCB"));
   }
 
@@ -77,10 +77,15 @@ public class PersonHelper extends HelperBase {
     return isElementPresent(By.name("selected[]"));
   }
 
-  public void createPerson(PersonData personData, boolean b) {
+  public void createPerson(PersonData personData, boolean creation) {
     addNewPerson();
-    fillPersonForm(personData, b);
+    fillPersonForm(personData, creation);
     submitForm();
+    click(By.linkText("home page"));
+  }
+
+  public int getPersonCount() {
+    return wd.findElements(By.name("selected[]")).size();
   }
 }
 

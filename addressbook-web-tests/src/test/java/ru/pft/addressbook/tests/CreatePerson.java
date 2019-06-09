@@ -2,6 +2,7 @@ package ru.pft.addressbook.tests;
 
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
+import ru.pft.addressbook.model.GroupData;
 import ru.pft.addressbook.model.PersonData;
 
 public class CreatePerson extends TestBase {
