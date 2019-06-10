@@ -2,9 +2,13 @@ package ru.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.pft.addressbook.model.PersonData;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.testng.Assert.assertTrue;
 
@@ -32,7 +36,7 @@ public class PersonHelper extends HelperBase {
     }
   }
 
-  public void editPerson() {
+  public void editPerson(int i) {
     click(By.xpath("//img[@alt='Edit']"));
   }
 
@@ -61,7 +65,7 @@ public class PersonHelper extends HelperBase {
     click(By.linkText("home"));
   }
 
-  public void selectPerson() {
+  public void selectPerson(int i) {
     click(By.name("selected[]"));
   }
 
@@ -86,6 +90,17 @@ public class PersonHelper extends HelperBase {
 
   public int getPersonCount() {
     return wd.findElements(By.name("selected[]")).size();
+  }
+
+  public List<PersonData> getPersonList() {
+    List<PersonData> persons = new ArrayList<>();
+    List<WebElement> elements = wd.findElements(By.name("selected[]"));
+    for (WebElement element : elements){
+      String name = element.getText();
+      PersonData person = new PersonData(name, null,null,null,null);
+      persons.add(person);
+    }
+    return persons;
   }
 }
 
