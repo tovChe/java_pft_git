@@ -5,6 +5,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.pft.addressbook.model.PersonData;
 
+import java.util.Comparator;
 import java.util.List;
 
 public class PersonModification extends TestBase {
@@ -25,5 +26,11 @@ public class PersonModification extends TestBase {
     List<PersonData> after = app.getPersonHelper().getPersonList();
     Assert.assertEquals(after.size(), before.size());
     System.out.println("Person is modified!!!");
+
+    Comparator<? super PersonData> byPersonName = Comparator.comparing(PersonData::getPersonName);
+    before.sort(byPersonName);
+    after.sort(byPersonName);
+    Assert.assertEquals(after.size(), before.size());
+    System.out.println("Checking is green!!!");
   }
 }

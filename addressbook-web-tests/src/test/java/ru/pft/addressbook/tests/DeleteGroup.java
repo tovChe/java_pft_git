@@ -4,6 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.pft.addressbook.model.GroupData;
 
+import java.util.Comparator;
 import java.util.List;
 
 public class DeleteGroup extends TestBase {
@@ -23,7 +24,12 @@ public class DeleteGroup extends TestBase {
     Assert.assertEquals(after.size(), before.size() - 1);
 
     before.remove(before.size() - 1);
-    Assert.assertEquals(after, before);
+    Comparator<? super GroupData> byID = Comparator.comparingInt(GroupData::getId);
+    before.sort(byID);
+    after.sort(byID);
+    Assert.assertEquals(before, after);
+    System.out.println("Checking is green!!!");
+
 
   }
 

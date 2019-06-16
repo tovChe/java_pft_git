@@ -94,13 +94,14 @@ public class PersonHelper extends HelperBase {
 
   public List<PersonData> getPersonList() {
     List<PersonData> persons = new ArrayList<>();
-    List<WebElement> elements = wd.findElements(By.name("selected[]"));
+    //List<WebElement> elements = wd.findElements(By.name("selected[]"));
+    List<WebElement> elements = wd.findElements(By.cssSelector("tr[name = 'entry']"));
     for (WebElement element : elements){
-      String name = element.getText();
-      PersonData person = new PersonData(name, null,null,null,null);
+      String name = element.findElement(By.cssSelector("td:nth-child(3)")).getText();
+      String lastName = element.findElement(By.cssSelector("td:nth-child(2)")).getText();
+      PersonData person = new PersonData(name, lastName,null,null,null);
       persons.add(person);
     }
     return persons;
   }
 }
-
