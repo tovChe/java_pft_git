@@ -12,6 +12,7 @@ public class CreatePerson extends TestBase {
   @Test
   public void testCreatePerson() {
 
+    app.getNavigationHelper().returnHomePage();
     List<PersonData> before = app.getPersonHelper().getPersonList();
     if (!app.getPersonHelper().isThereAPerson()) {
       app.getPersonHelper().createPerson(new PersonData("Tester", "Testovoy",
@@ -28,7 +29,8 @@ public class CreatePerson extends TestBase {
 
     before.sort(byPersonName);
     after.sort(byPersonName);
-    Assert.assertEquals(after.size(), before.size() + 1);
+    Assert.assertEquals(before.size() + 1, after.size());
+
 
   }
 }

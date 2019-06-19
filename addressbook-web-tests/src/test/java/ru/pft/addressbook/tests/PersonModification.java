@@ -13,6 +13,7 @@ public class PersonModification extends TestBase {
   @Test
   public void personModification() {
 
+    app.getNavigationHelper().returnHomePage();
     if (!app.getPersonHelper().isThereAPerson()) {
       app.getPersonHelper().createPerson(new PersonData("Tester", "Testovoy",
               "89999999999", "test@test.com", "Test group name"), true);

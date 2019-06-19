@@ -10,7 +10,7 @@ public class NavigationHelper extends HelperBase {
   }
 
   public void returnToGroupPage() {
-    click(By.linkText("group page"));
+    click(By.linkText("group page")); //.admin > a:nth-child(1)
   }
 
   public void returnHomePage() {
@@ -18,7 +18,7 @@ public class NavigationHelper extends HelperBase {
     if (isElementPresent(By.id("maintable"))){
       return;
     }
-    click(By.linkText("home page"));
+    click(By.cssSelector("#nav > ul:nth-child(1) > li:nth-child(1) > a:nth-child(1)")); //#nav > ul:nth-child(1) > li:nth-child(1) > a:nth-child(1)
   }
 
   public void gotoGroupPage() {

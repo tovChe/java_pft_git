@@ -85,7 +85,7 @@ public class PersonHelper extends HelperBase {
     addNewPerson();
     fillPersonForm(personData, creation);
     submitForm();
-    click(By.linkText("home page"));
+    click(By.linkText("home"));
   }
 
   public int getPersonCount() {
