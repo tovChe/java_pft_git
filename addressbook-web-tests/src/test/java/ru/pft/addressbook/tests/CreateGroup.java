@@ -5,11 +5,9 @@ import org.testng.annotations.Test;
 import ru.pft.addressbook.model.GroupData;
 
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 
 public class CreateGroup extends TestBase {
-
 
   @Test
   public void testCreateGroup() {

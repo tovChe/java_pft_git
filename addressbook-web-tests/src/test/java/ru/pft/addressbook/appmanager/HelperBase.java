@@ -48,4 +48,7 @@ public class HelperBase {
   public void submitForm() {
     wd.findElement(By.name("submit")).click();
   }
+  public void updateForm() {
+    wd.findElement(By.name("update")).click();
+  }
 }

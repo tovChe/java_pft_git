@@ -20,7 +20,12 @@ public class GroupHelper extends HelperBase {
     fillGroupForm(groupData);
     submitForm();
     click(By.linkText("group page"));
-
+  }
+  public void modifyGroup(List<GroupData> before, GroupData group) {
+   selectGroup(before.size() - 1);
+   editGroup();
+   fillGroupForm(group);
+   updateForm();
   }
 
   public void deleteGroup() {

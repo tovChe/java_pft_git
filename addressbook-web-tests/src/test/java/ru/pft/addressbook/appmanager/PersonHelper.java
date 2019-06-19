@@ -88,6 +88,13 @@ public class PersonHelper extends HelperBase {
     click(By.linkText("home"));
   }
 
+  public void modifyPerson(List<PersonData> before) {
+    editPerson(before.size() - 1);
+    fillPersonForm(new PersonData("Tester Meister", "Lenin",
+            "+79189999999", "tester@yahoooo.com", null), false);
+    updateForm();
+  }
+
   public int getPersonCount() {
     return wd.findElements(By.name("selected[]")).size();
   }
@@ -96,10 +103,10 @@ public class PersonHelper extends HelperBase {
     List<PersonData> persons = new ArrayList<>();
     //List<WebElement> elements = wd.findElements(By.name("selected[]"));
     List<WebElement> elements = wd.findElements(By.cssSelector("tr[name = 'entry']"));
-    for (WebElement element : elements){
+    for (WebElement element : elements) {
       String name = element.findElement(By.cssSelector("td:nth-child(3)")).getText();
       String lastName = element.findElement(By.cssSelector("td:nth-child(2)")).getText();
-      PersonData person = new PersonData(name, lastName,null,null,null);
+      PersonData person = new PersonData(name, lastName, null, null, null);
       persons.add(person);
     }
     return persons;
