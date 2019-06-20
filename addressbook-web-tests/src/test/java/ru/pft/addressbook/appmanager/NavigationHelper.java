@@ -13,15 +13,15 @@ public class NavigationHelper extends HelperBase {
     click(By.linkText("group page")); //.admin > a:nth-child(1)
   }
 
-  public void returnHomePage() {
+  public void homePage() {
 
     if (isElementPresent(By.id("maintable"))){
       return;
     }
-    click(By.cssSelector("#nav > ul:nth-child(1) > li:nth-child(1) > a:nth-child(1)")); //#nav > ul:nth-child(1) > li:nth-child(1) > a:nth-child(1)
+    click(By.linkText("home")); //#nav > ul:nth-child(1) > li:nth-child(1) > a:nth-child(1)
   }
 
-  public void gotoGroupPage() {
+  public void groupPage() {
 
     if (isElementPresent(By.tagName("h1"))
             && wd.findElement(By.tagName("h1")).getText().equals("Groups")

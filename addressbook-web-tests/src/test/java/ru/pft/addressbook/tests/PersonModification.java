@@ -11,19 +11,19 @@ public class PersonModification extends TestBase {
 
   @BeforeMethod
   public void preconditions(){
-    app.getNavigationHelper().returnHomePage();
-    if (!app.getPersonHelper().isThereAPerson()) {
-      app.getPersonHelper().createPerson(new PersonData("Tester", "Testovoy",
+    app.goTo().homePage();
+    if (app.person().list().size() == 0) {
+      app.person().create(new PersonData("Tester", "Testovoy",
               "89999999999", "test@test.com", "Test group name"), true);
     }
   }
   @Test
   public void personModification() {
 
-    List<PersonData> before = app.getPersonHelper().getPersonList();
-    app.getPersonHelper().modifyPerson(before);
-    app.getNavigationHelper().returnHomePage();
-    List<PersonData> after = app.getPersonHelper().getPersonList();
+    List<PersonData> before = app.person().list();
+    app.person().modify(before);
+    app.goTo().homePage();
+    List<PersonData> after = app.person().list();
     Assert.assertEquals(after.size(), before.size());
     System.out.println("Person is modified!!!");
 

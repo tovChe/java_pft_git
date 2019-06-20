@@ -59,13 +59,13 @@ public class PersonHelper extends HelperBase {
       acceptNextAlert = true;
     }
   }*/
-  public void deletePerson() {
+  public void delete() {
     click(By.xpath("//input[@value='Delete']"));
     wd.switchTo().alert().accept();
     click(By.linkText("home"));
   }
 
-  public void selectPerson(int i) {
+  public void select(int i) {
     click(By.name("selected[]"));
   }
 
@@ -81,14 +81,14 @@ public class PersonHelper extends HelperBase {
     return isElementPresent(By.name("selected[]"));
   }
 
-  public void createPerson(PersonData personData, boolean creation) {
+  public void create(PersonData personData, boolean creation) {
     addNewPerson();
     fillPersonForm(personData, creation);
     submitForm();
     click(By.linkText("home"));
   }
 
-  public void modifyPerson(List<PersonData> before) {
+  public void modify(List<PersonData> before) {
     editPerson(before.size() - 1);
     fillPersonForm(new PersonData("Tester Meister", "Lenin",
             "+79189999999", "tester@yahoooo.com", null), false);
@@ -99,7 +99,7 @@ public class PersonHelper extends HelperBase {
     return wd.findElements(By.name("selected[]")).size();
   }
 
-  public List<PersonData> getPersonList() {
+  public List<PersonData> list() {
     List<PersonData> persons = new ArrayList<>();
     //List<WebElement> elements = wd.findElements(By.name("selected[]"));
     List<WebElement> elements = wd.findElements(By.cssSelector("tr[name = 'entry']"));

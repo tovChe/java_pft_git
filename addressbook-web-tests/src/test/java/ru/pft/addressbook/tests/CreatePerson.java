@@ -1,6 +1,7 @@
 package ru.pft.addressbook.tests;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.pft.addressbook.model.PersonData;
 
@@ -9,26 +10,29 @@ import java.util.List;
 
 public class CreatePerson extends TestBase {
 
-  @Test
-  public void testCreatePerson() {
-
-    app.getNavigationHelper().returnHomePage();
-    List<PersonData> before = app.getPersonHelper().getPersonList();
-    if (!app.getPersonHelper().isThereAPerson()) {
-      app.getPersonHelper().createPerson(new PersonData("Tester", "Testovoy",
+  @BeforeMethod
+  public void preconditions() {
+    if (!app.person().isThereAPerson()) {
+      app.person().create(new PersonData("Tester", "Testovoy",
               "89999999999", "test@test.com", "Test group name"), true);
       System.out.println("Person was created!!!");
     }
+  }
 
+  @Test
+  public void testCreatePerson() {
+
+    app.goTo().homePage();
+    List<PersonData> before = app.person().list();
     PersonData person = new PersonData("Tester", "Testovoy",
             "89999999999", "test@test.com", "Test group name");
-    app.getPersonHelper().createPerson(person, true);
-    List<PersonData> after = app.getPersonHelper().getPersonList();
+    app.person().create(person, true);
+    List<PersonData> after = app.person().list();
 
-    Comparator<? super PersonData> byPersonName = Comparator.comparing(PersonData::getPersonName);
+    Comparator<? super PersonData> personName = Comparator.comparing(PersonData::getPersonName);
 
-    before.sort(byPersonName);
-    after.sort(byPersonName);
+    before.sort(personName);
+    after.sort(personName);
     Assert.assertEquals(before.size() + 1, after.size());
 
 

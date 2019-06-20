@@ -55,15 +55,15 @@ public class ApplicationManager {
     return sessionHelper;
   }
 
-  public GroupHelper getGroupHelper() {
+  public GroupHelper group() {
     return groupHelper;
   }
 
-  public PersonHelper getPersonHelper() {
+  public PersonHelper person() {
     return personHelper;
   }
 
-  public NavigationHelper getNavigationHelper() {
+  public NavigationHelper goTo() {
     return navigationHelper;
   }
 
