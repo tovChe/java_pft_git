@@ -7,17 +7,17 @@ import java.util.Objects;
 public class PersonData {
   private String personName;
   private String personLastName;
-  private final String telNumber;
-  private final String email;
+  private String telNumber;
+  private String email;
   private String groupName;
 
-  public PersonData(String personName, String personLastName, String telNumber, String email, String groupName) {
+ /* public PersonData(String personName, String personLastName, String telNumber, String email, String withGroup) {
     this.personName = personName;
     this.personLastName = personLastName;
     this.telNumber = telNumber;
     this.email = email;
-    this.groupName = groupName;
-  }
+    this.withGroup = withGroup;
+  }*/
 
   public String getPersonName() {
     return personName;
@@ -37,6 +37,31 @@ public class PersonData {
 
   public String getGroupName() {
     return groupName;
+  }
+
+  public PersonData withName(String personName) {
+    this.personName = personName;
+    return this;
+  }
+
+  public PersonData withLastName(String personLastName) {
+    this.personLastName = personLastName;
+    return this;
+  }
+
+  public PersonData withGroup(String groupName) {
+    this.groupName = groupName;
+    return this;
+  }
+
+  public PersonData withTelNumber(String telNumber) {
+    this.telNumber = telNumber;
+    return this;
+  }
+
+  public PersonData withEmail(String email) {
+    this.email = email;
+    return this;
   }
 
   @Override

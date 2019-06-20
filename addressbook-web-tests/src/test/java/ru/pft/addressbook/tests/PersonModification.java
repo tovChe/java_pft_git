@@ -13,8 +13,8 @@ public class PersonModification extends TestBase {
   public void preconditions(){
     app.goTo().homePage();
     if (app.person().list().size() == 0) {
-      app.person().create(new PersonData("Tester", "Testovoy",
-              "89999999999", "test@test.com", "Test group name"), true);
+      app.person().create(new PersonData().withName("Tester").withLastName("Testovoy")
+              .withTelNumber("89999999999").withEmail("test@test.com").withGroup("Test group name"), true);
     }
   }
   @Test

@@ -4,29 +4,29 @@ import java.util.Objects;
 
 public class GroupData {
 
-  public int id;
+  public int id = Integer.MAX_VALUE;
   public String textFooter;
   public String header;
   public String groupName;
 
-  public GroupData(String header, String textFooter, String groupName) {
+/*  public GroupData(String header, String textFooter, String withGroup) {
     this.id = 0;
     this.header = header;
     this.textFooter = textFooter;
-    this.groupName = groupName;
+    this.withGroup = withGroup;
   }
-  public GroupData(int id, String header, String textFooter, String groupName) {
+  public GroupData(int id, String header, String textFooter, String withGroup) {
     this.id = id;
     this.header = header;
     this.textFooter = textFooter;
-    this.groupName = groupName;
-  }
+    this.withGroup = withGroup;
+  }*/
 
   @Override
   public String toString() {
     return "GroupData{" +
             "id=" + id +
-            ", groupName='" + groupName + '\'' +
+            ", withGroup='" + groupName + '\'' +
             '}';
   }
 
@@ -44,15 +44,30 @@ public class GroupData {
     return Objects.hash(id, groupName);
   }
 
-  public void setId(int id) {
+  public GroupData withId(int id) {
     this.id = id;
+    return this;
   }
 
   public int getId() {
     return id;
   }
+  public GroupData withFooter(String textFooter) {
+    this.textFooter = textFooter;
+    return this;
+  }
 
-  public String getTextFooter() {
+  public GroupData withHeader(String header) {
+    this.header = header;
+    return this;
+  }
+
+  public GroupData withName(String groupName) {
+    this.groupName = groupName;
+    return this;
+  }
+
+  /*public String getTextFooter() {
     return textFooter;
   }
 
@@ -61,6 +76,6 @@ public class GroupData {
   }
 
   public String getGroupName() {
-    return groupName;
-  }
+    return withGroup;
+  }*/
 }

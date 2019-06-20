@@ -13,8 +13,8 @@ public class CreatePerson extends TestBase {
   @BeforeMethod
   public void preconditions() {
     if (!app.person().isThereAPerson()) {
-      app.person().create(new PersonData("Tester", "Testovoy",
-              "89999999999", "test@test.com", "Test group name"), true);
+      app.person().create(new PersonData().withName("Tester").withLastName("Testovoy")
+              .withTelNumber("89999999999").withEmail("test@test.com").withGroup("Test group name"), true);
       System.out.println("Person was created!!!");
     }
   }
@@ -24,8 +24,8 @@ public class CreatePerson extends TestBase {
 
     app.goTo().homePage();
     List<PersonData> before = app.person().list();
-    PersonData person = new PersonData("Tester", "Testovoy",
-            "89999999999", "test@test.com", "Test group name");
+    PersonData person = new PersonData().withName("Tester").withLastName("Testovoy")
+            .withTelNumber("89999999999").withEmail("test@test.com").withGroup("Test group name");
     app.person().create(person, true);
     List<PersonData> after = app.person().list();
 

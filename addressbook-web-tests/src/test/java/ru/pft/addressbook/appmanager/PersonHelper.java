@@ -90,8 +90,7 @@ public class PersonHelper extends HelperBase {
 
   public void modify(List<PersonData> before) {
     editPerson(before.size() - 1);
-    fillPersonForm(new PersonData("Tester Meister", "Lenin",
-            "+79189999999", "tester@yahoooo.com", null), false);
+    fillPersonForm(new PersonData().withName("Tester Meister").withLastName("Lenin").withTelNumber("+79189999999").withEmail("tester@yahoooo.com"), false);
     updateForm();
   }
 
@@ -106,7 +105,7 @@ public class PersonHelper extends HelperBase {
     for (WebElement element : elements) {
       String name = element.findElement(By.cssSelector("td:nth-child(3)")).getText();
       String lastName = element.findElement(By.cssSelector("td:nth-child(2)")).getText();
-      PersonData person = new PersonData(name, lastName, null, null, null);
+      PersonData person = new PersonData().withName(name).withLastName(lastName);
       persons.add(person);
     }
     return persons;
