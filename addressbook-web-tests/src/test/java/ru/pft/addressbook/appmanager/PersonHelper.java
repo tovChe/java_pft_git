@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.pft.addressbook.model.PersonData;
+import ru.pft.addressbook.model.Persons;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -36,7 +37,7 @@ public class PersonHelper extends HelperBase {
     }
   }
 
-  public void editPerson(int i) {
+  public void editPerson(PersonData person) {
     click(By.xpath("//img[@alt='Edit']"));
   }
 
@@ -47,7 +48,7 @@ public class PersonHelper extends HelperBase {
     click(By.linkText("home"));
   }
 
-  public void select(int person) {
+  public void select(PersonData person) {
     click(By.name("selected[]"));
   }
 
@@ -70,8 +71,13 @@ public class PersonHelper extends HelperBase {
     click(By.linkText("home"));
   }
 
-  public void modify(Set<PersonData> before) {
-    editPerson(before.size() - 1);
+//  public void modify(Set<PersonData> before) {
+//    editPerson(before.size() - 1);
+//    fillPersonForm(new PersonData().withName("Tester Meister").withLastName("Lenin").withTelNumber("+79189999999").withEmail("tester@yahoooo.com"), false);
+//    updateForm();
+//  }
+  public void modify(PersonData person) {
+    editPerson(person.withName("Tester").withLastName("Testovoy"));
     fillPersonForm(new PersonData().withName("Tester Meister").withLastName("Lenin").withTelNumber("+79189999999").withEmail("tester@yahoooo.com"), false);
     updateForm();
   }
@@ -92,8 +98,8 @@ public class PersonHelper extends HelperBase {
     return persons;
   }
 
-  public Set<PersonData> all() {
-    Set<PersonData> persons = new HashSet<>();
+  public Persons all() {
+    Persons persons = new Persons();
     List<WebElement> elements = wd.findElements(By.cssSelector("tr[name = 'entry']"));
     for (WebElement element : elements) {
       String name = element.findElement(By.cssSelector("td:nth-child(3)")).getText();

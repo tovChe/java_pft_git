@@ -8,10 +8,6 @@ import org.testng.annotations.Test;
 import ru.pft.addressbook.model.GroupData;
 import ru.pft.addressbook.model.Groups;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Set;
-
 public class GroupModification extends TestBase {
 
   @BeforeMethod

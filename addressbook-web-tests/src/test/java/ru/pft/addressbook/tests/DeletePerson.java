@@ -4,9 +4,10 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.pft.addressbook.model.PersonData;
+import ru.pft.addressbook.model.Persons;
 
-import java.util.List;
-import java.util.Set;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class DeletePerson extends TestBase {
 
@@ -22,11 +23,16 @@ public class DeletePerson extends TestBase {
   @Test
   public void testDeletePerson() throws Exception {
 
-    Set<PersonData> before = app.person().all();
-    app.person().select(before.size() - 1);
+    app.goTo().homePage();
+    Persons before = app.person().all();
+    PersonData deletedPerson = before.iterator().next();
+    PersonData person = new PersonData().withName("Tester").withLastName("Testovoy");
+    app.person().select(deletedPerson);
     app.person().delete();
-    Set<PersonData> after = app.person().all();
+    Persons after = app.person().all();
     Assert.assertEquals(after.size(), before.size() - 1);
+
+    assertThat(after, equalTo(before.without(person)));
     System.out.println("Person is deleted!");
 
   }

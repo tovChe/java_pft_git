@@ -1,9 +1,13 @@
 package ru.pft.addressbook.tests;
 
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.MatcherAssert;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.pft.addressbook.model.PersonData;
+import ru.pft.addressbook.model.Persons;
+
 import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
@@ -22,11 +26,15 @@ public class PersonModification extends TestBase {
   public void personModification() {
 
     app.goTo().homePage();
-    Set<PersonData> before = app.person().all();
-    app.person().modify(before);
+
+    Persons before = app.person().all();
+    PersonData modifiedPerson = before.iterator().next();
+    PersonData person = new PersonData().withName("Tester Meister").withLastName("Lenin");
+    app.person().modify(modifiedPerson);
     app.goTo().homePage();
-    Set<PersonData> after = app.person().all();
+    Persons after = app.person().all();
     Assert.assertEquals(after.size(), before.size());
+    MatcherAssert.assertThat(after, CoreMatchers.equalTo(before.without(modifiedPerson).withAdded(person)));
     System.out.println("Person is modified!!!");
 
   }
