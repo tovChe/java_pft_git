@@ -4,9 +4,10 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.pft.addressbook.model.GroupData;
+import ru.pft.addressbook.model.Groups;
 
-import java.util.Comparator;
-import java.util.List;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class DeleteGroup extends TestBase {
 
@@ -22,18 +23,15 @@ public class DeleteGroup extends TestBase {
   public void testDeleteGroup() {
 
     app.goTo().groupPage();
-    List<GroupData> before = app.group().list();
-    int index = before.size() - 1;
-    app.group().delete(index);
+    Groups before = app.group().all();
+    GroupData deletedGroup = before.iterator().next();
+    app.group().delete(deletedGroup);
     app.goTo().returnToGroupPage();
-    List<GroupData> after = app.group().list();
+    Groups after = app.group().all();
     Assert.assertEquals(after.size(), before.size() - 1);
 
-    before.remove(index);
-    Comparator<? super GroupData> byID = Comparator.comparingInt(GroupData::getId);
-    before.sort(byID);
-    after.sort(byID);
-    Assert.assertEquals(before, after);
-    System.out.println("Checking is green!!!");
+    before.remove(deletedGroup);
+    assertThat(after, equalTo(before.without(deletedGroup)));
+    System.out.println("Group was deleted!!!");
   }
 }
