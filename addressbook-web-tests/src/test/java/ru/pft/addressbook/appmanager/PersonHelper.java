@@ -8,9 +8,9 @@ import org.testng.Assert;
 import ru.pft.addressbook.model.PersonData;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
-
-import static org.testng.Assert.assertTrue;
+import java.util.Set;
 
 public class PersonHelper extends HelperBase {
 
@@ -40,32 +40,14 @@ public class PersonHelper extends HelperBase {
     click(By.xpath("//img[@alt='Edit']"));
   }
 
-  /*public void acceptConfirmation(String message) {
-    assertTrue(closeAlertAndGetItsText().matches(message));
-  }
 
-  private String closeAlertAndGetItsText() {
-    boolean acceptNextAlert = true;
-    try {
-      Alert alert = wd.switchTo().alert();
-      String alertText = alert.getText();
-      if (acceptNextAlert) {
-        alert.accept();
-      } else {
-        alert.dismiss();
-      }
-      return alertText;
-    } finally {
-      acceptNextAlert = true;
-    }
-  }*/
   public void delete() {
     click(By.xpath("//input[@value='Delete']"));
     wd.switchTo().alert().accept();
     click(By.linkText("home"));
   }
 
-  public void select(int i) {
+  public void select(int person) {
     click(By.name("selected[]"));
   }
 
@@ -88,7 +70,7 @@ public class PersonHelper extends HelperBase {
     click(By.linkText("home"));
   }
 
-  public void modify(List<PersonData> before) {
+  public void modify(Set<PersonData> before) {
     editPerson(before.size() - 1);
     fillPersonForm(new PersonData().withName("Tester Meister").withLastName("Lenin").withTelNumber("+79189999999").withEmail("tester@yahoooo.com"), false);
     updateForm();
@@ -100,7 +82,18 @@ public class PersonHelper extends HelperBase {
 
   public List<PersonData> list() {
     List<PersonData> persons = new ArrayList<>();
-    //List<WebElement> elements = wd.findElements(By.name("selected[]"));
+    List<WebElement> elements = wd.findElements(By.cssSelector("tr[name = 'entry']"));
+    for (WebElement element : elements) {
+      String name = element.findElement(By.cssSelector("td:nth-child(3)")).getText();
+      String lastName = element.findElement(By.cssSelector("td:nth-child(2)")).getText();
+      PersonData person = new PersonData().withName(name).withLastName(lastName);
+      persons.add(person);
+    }
+    return persons;
+  }
+
+  public Set<PersonData> all() {
+    Set<PersonData> persons = new HashSet<>();
     List<WebElement> elements = wd.findElements(By.cssSelector("tr[name = 'entry']"));
     for (WebElement element : elements) {
       String name = element.findElement(By.cssSelector("td:nth-child(3)")).getText();

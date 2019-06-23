@@ -1,7 +1,5 @@
 package ru.pft.addressbook.model;
 
-import org.openqa.selenium.WebElement;
-
 import java.util.Objects;
 
 public class PersonData {
@@ -10,14 +8,6 @@ public class PersonData {
   private String telNumber;
   private String email;
   private String groupName;
-
- /* public PersonData(String personName, String personLastName, String telNumber, String email, String withGroup) {
-    this.personName = personName;
-    this.personLastName = personLastName;
-    this.telNumber = telNumber;
-    this.email = email;
-    this.withGroup = withGroup;
-  }*/
 
   public String getPersonName() {
     return personName;

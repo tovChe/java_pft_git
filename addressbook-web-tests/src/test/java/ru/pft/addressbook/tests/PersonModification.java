@@ -6,13 +6,14 @@ import org.testng.annotations.Test;
 import ru.pft.addressbook.model.PersonData;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 
 public class PersonModification extends TestBase {
 
   @BeforeMethod
   public void preconditions(){
     app.goTo().homePage();
-    if (app.person().list().size() == 0) {
+    if (app.person().all().size() == 0) {
       app.person().create(new PersonData().withName("Tester").withLastName("Testovoy")
               .withTelNumber("89999999999").withEmail("test@test.com").withGroup("Test group name"), true);
     }
@@ -20,18 +21,14 @@ public class PersonModification extends TestBase {
   @Test
   public void personModification() {
 
-    List<PersonData> before = app.person().list();
+    app.goTo().homePage();
+    Set<PersonData> before = app.person().all();
     app.person().modify(before);
     app.goTo().homePage();
-    List<PersonData> after = app.person().list();
+    Set<PersonData> after = app.person().all();
     Assert.assertEquals(after.size(), before.size());
     System.out.println("Person is modified!!!");
 
-    Comparator<? super PersonData> byPersonName = Comparator.comparing(PersonData::getPersonName);
-    before.sort(byPersonName);
-    after.sort(byPersonName);
-    Assert.assertEquals(after.size(), before.size());
-    System.out.println("Checking is green!!!");
   }
 
 
