@@ -1,5 +1,6 @@
 package ru.pft.addressbook.tests;
 
+import org.hamcrest.MatcherAssert;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.pft.addressbook.model.PersonData;
@@ -15,13 +16,15 @@ public class CreatePerson extends TestBase {
 
     app.goTo().homePage();
     Persons before = app.person().all();
-    PersonData person = new PersonData().withName("Tester").withLastName("Testovoy")
+    PersonData addedPerson = before.iterator().next();
+    PersonData person = new PersonData().withId(addedPerson.getId()).withName("Tester").withLastName("Testovoy")
             .withTelNumber("89999999999").withEmail("test@test.com").withGroup("Test group name");
     app.person().create(person, true);
+    app.goTo().homePage();
+    assertThat(app.person().getPersonCount(), equalTo(before.size() + 1));
     Persons after = app.person().all();
 
     before.add(person);
-    Assert.assertEquals(before, after);
-    assertThat(before, equalTo(after.withAdded(person)));
+    assertThat(after, equalTo(before.withAdded(addedPerson)));
   }
 }
