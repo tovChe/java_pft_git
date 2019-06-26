@@ -9,9 +9,7 @@ import ru.pft.addressbook.model.PersonData;
 import ru.pft.addressbook.model.Persons;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class PersonHelper extends HelperBase {
 
@@ -71,13 +69,14 @@ public class PersonHelper extends HelperBase {
     click(By.linkText("home"));
   }
 
-//  public void modify(Set<PersonData> before) {
+  //  public void modify(Set<PersonData> before) {
 //    editPerson(before.size() - 1);
 //    fillPersonForm(new PersonData().withName("Tester Meister").withLastName("Lenin").withTelNumber("+79189999999").withEmail("tester@yahoooo.com"), false);
 //    updateForm();
 //  }
   public void modify(PersonData person) {
-    editPerson(person.withName("Tester").withLastName("Testovoy"));
+    //editPerson(person.withName("Tester").withLastName("Testovoy"));
+    initPersonModificationWithId(person.getId());
     fillPersonForm(new PersonData().withName("Tester Meister").withLastName("Lenin").withTelNumber("+79189999999").withEmail("tester@yahoooo.com"), false);
     updateForm();
   }
@@ -102,11 +101,17 @@ public class PersonHelper extends HelperBase {
     Persons persons = new Persons();
     List<WebElement> elements = wd.findElements(By.cssSelector("tr[name = 'entry']"));
     for (WebElement element : elements) {
+      int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
       String name = element.findElement(By.cssSelector("td:nth-child(3)")).getText();
       String lastName = element.findElement(By.cssSelector("td:nth-child(2)")).getText();
-      PersonData person = new PersonData().withName(name).withLastName(lastName);
+      PersonData person = new PersonData().withId(id).withName(name).withLastName(lastName);
       persons.add(person);
     }
     return persons;
+  }
+
+  public void initPersonModificationWithId(int id) {
+    wd.findElement(By.xpath(String.format("//input[@value = '%s']/../../td[8]/a", id))).click();
+    //click(By.cssSelector("input[value = '" + id + "']"));
   }
 }

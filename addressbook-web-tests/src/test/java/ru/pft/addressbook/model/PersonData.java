@@ -3,11 +3,21 @@ package ru.pft.addressbook.model;
 import java.util.Objects;
 
 public class PersonData {
+  private int id;
   private String personName;
   private String personLastName;
   private String telNumber;
   private String email;
   private String groupName;
+
+  public int getId() {
+    return id;
+  }
+
+  public PersonData withId(int id) {
+    this.id = id;
+    return this;
+  }
 
   public String getPersonName() {
     return personName;
@@ -59,13 +69,14 @@ public class PersonData {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     PersonData that = (PersonData) o;
-    return Objects.equals(personName, that.personName) &&
+    return id == that.id &&
+            Objects.equals(personName, that.personName) &&
             Objects.equals(personLastName, that.personLastName);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(personName, personLastName);
+    return Objects.hash(id, personName, personLastName);
   }
 
   @Override

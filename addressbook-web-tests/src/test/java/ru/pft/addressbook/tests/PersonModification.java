@@ -29,7 +29,7 @@ public class PersonModification extends TestBase {
 
     Persons before = app.person().all();
     PersonData modifiedPerson = before.iterator().next();
-    PersonData person = new PersonData().withName("Tester Meister").withLastName("Lenin");
+    PersonData person = new PersonData().withId(modifiedPerson.getId()).withName("Tester Meister").withLastName("Lenin");
     app.person().modify(modifiedPerson);
     app.goTo().homePage();
     Persons after = app.person().all();
