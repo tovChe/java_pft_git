@@ -12,6 +12,9 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+
 public class PersonModification extends TestBase {
 
   @BeforeMethod
@@ -32,9 +35,10 @@ public class PersonModification extends TestBase {
     PersonData person = new PersonData().withId(modifiedPerson.getId()).withName("Tester Meister").withLastName("Lenin");
     app.person().modify(modifiedPerson);
     app.goTo().homePage();
+    assertThat(app.person().getPersonCount(), equalTo(before.size()));
     Persons after = app.person().all();
-    Assert.assertEquals(after.size(), before.size());
-    MatcherAssert.assertThat(after, CoreMatchers.equalTo(before.without(modifiedPerson).withAdded(person)));
+
+    assertThat(after, equalTo(before.without(modifiedPerson).withAdded(person)));
     System.out.println("Person is modified!!!");
 
   }

@@ -43,6 +43,7 @@ public class PersonHelper extends HelperBase {
   public void delete() {
     click(By.xpath("//input[@value='Delete']"));
     wd.switchTo().alert().accept();
+    personCache = null;
     click(By.linkText("home"));
   }
 
@@ -66,19 +67,15 @@ public class PersonHelper extends HelperBase {
     addNewPerson();
     fillPersonForm(personData, creation);
     submitForm();
+    personCache = null;
     click(By.linkText("home"));
   }
 
-  //  public void modify(Set<PersonData> before) {
-//    editPerson(before.size() - 1);
-//    fillPersonForm(new PersonData().withName("Tester Meister").withLastName("Lenin").withTelNumber("+79189999999").withEmail("tester@yahoooo.com"), false);
-//    updateForm();
-//  }
   public void modify(PersonData person) {
-    //editPerson(person.withName("Tester").withLastName("Testovoy"));
     initPersonModificationWithId(person.getId());
     fillPersonForm(new PersonData().withName("Tester Meister").withLastName("Lenin").withTelNumber("+79189999999").withEmail("tester@yahoooo.com"), false);
     updateForm();
+    personCache = null;
   }
 
   public int getPersonCount() {
@@ -97,21 +94,25 @@ public class PersonHelper extends HelperBase {
     return persons;
   }
 
+  private Persons personCache = null;
+
   public Persons all() {
-    Persons persons = new Persons();
+    if (personCache != null) {
+      return new Persons(personCache);
+    }
+    personCache = new Persons();
     List<WebElement> elements = wd.findElements(By.cssSelector("tr[name = 'entry']"));
     for (WebElement element : elements) {
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
       String name = element.findElement(By.cssSelector("td:nth-child(3)")).getText();
       String lastName = element.findElement(By.cssSelector("td:nth-child(2)")).getText();
       PersonData person = new PersonData().withId(id).withName(name).withLastName(lastName);
-      persons.add(person);
+      personCache.add(person);
     }
-    return persons;
+    return personCache;
   }
 
   public void initPersonModificationWithId(int id) {
     wd.findElement(By.xpath(String.format("//input[@value = '%s']/../../td[8]/a", id))).click();
-    //click(By.cssSelector("input[value = '" + id + "']"));
   }
 }

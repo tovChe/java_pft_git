@@ -1,6 +1,5 @@
 package ru.pft.addressbook.tests;
 
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.pft.addressbook.model.PersonData;
@@ -29,10 +28,11 @@ public class DeletePerson extends TestBase {
     PersonData person = new PersonData().withName("Tester").withLastName("Testovoy");
     app.person().select(deletedPerson);
     app.person().delete();
+    assertThat(app.person().getPersonCount(), equalTo(before.size() - 1));
     Persons after = app.person().all();
-    Assert.assertEquals(after.size(), before.size() - 1);
 
-    assertThat(after, equalTo(before.without(person)));
+    before.remove(person);
+    assertThat(after, equalTo(before.without(deletedPerson)));
     System.out.println("Person is deleted!");
 
   }
