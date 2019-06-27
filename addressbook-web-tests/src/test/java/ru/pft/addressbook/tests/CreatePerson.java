@@ -18,11 +18,9 @@ public class CreatePerson extends TestBase {
     Persons before = app.person().all();
     PersonData addedPerson = before.iterator().next();
     PersonData person = new PersonData().withId(addedPerson.getId()).withName("Tester").withLastName("Testovoy")
-            .withTelNumber("89999999999").withEmail("test@test.com").withGroup("Test group name");
+            .withMobilePhone("89999999999").withHomePhone("222").withWorkPhone("333").withEmail("test@test.com").withGroup("Test group name");
     app.person().create(person, true);
 
-    app.goTo().homePage();
-    assertThat(app.person().count(), equalTo(before.size() + 1));
     app.goTo().homePage();
     assertThat(app.person().count(), equalTo(before.size() + 1));
     Persons after = app.person().all();

@@ -6,7 +6,9 @@ public class PersonData {
   private int id;
   private String personName;
   private String personLastName;
-  private String telNumber;
+  private String mobilePhone;
+  private String homePhone;
+  private String workPhone;
   private String email;
   private String groupName;
 
@@ -27,8 +29,16 @@ public class PersonData {
     return personLastName;
   }
 
-  public String getTelNumber() {
-    return telNumber;
+  public String getMobilePhone() {
+    return mobilePhone;
+  }
+
+  public String getHomePhone() {
+    return homePhone;
+  }
+
+  public String getWorkPhone() {
+    return workPhone;
   }
 
   public String getEmail() {
@@ -54,8 +64,16 @@ public class PersonData {
     return this;
   }
 
-  public PersonData withTelNumber(String telNumber) {
-    this.telNumber = telNumber;
+  public PersonData withMobilePhone(String mobilePhone) {
+    this.mobilePhone = mobilePhone;
+    return this;
+  }
+  public PersonData withHomePhone(String homePhone) {
+    this.homePhone = homePhone;
+    return this;
+  }
+  public PersonData withWorkPhone(String workPhone) {
+    this.workPhone = workPhone;
     return this;
   }
 
@@ -86,4 +104,6 @@ public class PersonData {
             ", personLastName='" + personLastName + '\'' +
             '}';
   }
+
+
 }
