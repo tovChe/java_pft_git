@@ -78,7 +78,7 @@ public class PersonHelper extends HelperBase {
     personCache = null;
   }
 
-  public int getPersonCount() {
+  public int count() {
     return wd.findElements(By.name("selected[]")).size();
   }
 

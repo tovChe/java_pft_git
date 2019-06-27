@@ -1,16 +1,9 @@
 package ru.pft.addressbook.tests;
 
-import org.hamcrest.CoreMatchers;
-import org.hamcrest.MatcherAssert;
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.pft.addressbook.model.PersonData;
 import ru.pft.addressbook.model.Persons;
-
-import java.util.Comparator;
-import java.util.List;
-import java.util.Set;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -35,7 +28,7 @@ public class PersonModification extends TestBase {
     PersonData person = new PersonData().withId(modifiedPerson.getId()).withName("Tester Meister").withLastName("Lenin");
     app.person().modify(modifiedPerson);
     app.goTo().homePage();
-    assertThat(app.person().getPersonCount(), equalTo(before.size()));
+    assertThat(app.person().count(), equalTo(before.size()));
     Persons after = app.person().all();
 
     assertThat(after, equalTo(before.without(modifiedPerson).withAdded(person)));

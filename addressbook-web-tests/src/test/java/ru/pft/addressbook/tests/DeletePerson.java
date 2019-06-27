@@ -28,7 +28,7 @@ public class DeletePerson extends TestBase {
     PersonData person = new PersonData().withName("Tester").withLastName("Testovoy");
     app.person().select(deletedPerson);
     app.person().delete();
-    assertThat(app.person().getPersonCount(), equalTo(before.size() - 1));
+    assertThat(app.person().count(), equalTo(before.size() - 1));
     Persons after = app.person().all();
 
     before.remove(person);
