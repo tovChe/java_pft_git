@@ -1,5 +1,6 @@
 package ru.pft.addressbook.model;
 
+import java.io.File;
 import java.util.Objects;
 
 public class PersonData {
@@ -16,6 +17,7 @@ public class PersonData {
   private String email2;
   private String email3;
   private String address;
+  private File photo;
 
   public int getId() {
     return id;
@@ -72,6 +74,14 @@ public class PersonData {
 
   public String getAddress() {
     return address;
+  }
+  public File getPhoto() {
+    return photo;
+  }
+
+  public PersonData withPhoto(File photo) {
+    this.photo = photo;
+    return this;
   }
 
   public PersonData withAddress(String address) {

@@ -5,6 +5,8 @@ import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 
+import java.io.File;
+
 public class HelperBase {
 
   protected WebDriver wd;
@@ -24,6 +26,13 @@ public class HelperBase {
       wd.findElement(locator).sendKeys(text);
     } else {
       System.out.println("NULL in text field!");
+    }
+  }
+  protected void attach(By locator, File file) {
+    if (!(file == null)) {
+      wd.findElement(locator).sendKeys(file.getAbsolutePath());
+    } else {
+      System.out.println("File not exist!");
     }
   }
 
@@ -48,6 +57,7 @@ public class HelperBase {
   public void submitForm() {
     wd.findElement(By.name("submit")).click();
   }
+
   public void updateForm() {
     wd.findElement(By.name("update")).click();
   }

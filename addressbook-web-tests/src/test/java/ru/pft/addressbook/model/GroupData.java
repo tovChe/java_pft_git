@@ -9,19 +9,6 @@ public class GroupData {
   public String header;
   public String groupName;
 
-/*  public GroupData(String header, String textFooter, String withGroup) {
-    this.id = 0;
-    this.header = header;
-    this.textFooter = textFooter;
-    this.withGroup = withGroup;
-  }
-  public GroupData(int id, String header, String textFooter, String withGroup) {
-    this.id = id;
-    this.header = header;
-    this.textFooter = textFooter;
-    this.withGroup = withGroup;
-  }*/
-
   @Override
   public String toString() {
     return "GroupData{" +
@@ -67,7 +54,7 @@ public class GroupData {
     return this;
   }
 
-  /*public String getTextFooter() {
+  public String getTextFooter() {
     return textFooter;
   }
 
@@ -76,6 +63,6 @@ public class GroupData {
   }
 
   public String getGroupName() {
-    return withGroup;
-  }*/
+    return groupName;
+  }
 }

@@ -8,6 +8,7 @@ import org.testng.Assert;
 import ru.pft.addressbook.model.PersonData;
 import ru.pft.addressbook.model.Persons;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +30,7 @@ public class PersonHelper extends HelperBase {
     type(By.name("home"), personData.getHomePhone());
     type(By.name("work"), personData.getWorkPhone());
     type(By.name("email"), personData.getEmail());
+    attach(By.name("photo"), personData.getPhoto());
 
     if (creation) {
       new Select(wd.findElement(By.name("new_group")));
