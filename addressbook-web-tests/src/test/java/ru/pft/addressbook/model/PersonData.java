@@ -9,8 +9,13 @@ public class PersonData {
   private String mobilePhone;
   private String homePhone;
   private String workPhone;
+  private String allPhones;
   private String email;
+  private String allEmails;
   private String groupName;
+  private String email2;
+  private String email3;
+  private String address;
 
   public int getId() {
     return id;
@@ -41,12 +46,37 @@ public class PersonData {
     return workPhone;
   }
 
+  public String getAllPhones() {
+    return allPhones;
+  }
+
   public String getEmail() {
     return email;
   }
 
+  public String getEmail2() {
+    return email2;
+  }
+
+  public String getEmail3() {
+    return email3;
+  }
+
+  public String getAllEmails() {
+    return allEmails;
+  }
+
   public String getGroupName() {
     return groupName;
+  }
+
+  public String getAddress() {
+    return address;
+  }
+
+  public PersonData withAddress(String address) {
+    this.address = address;
+    return this;
   }
 
   public PersonData withName(String personName) {
@@ -68,17 +98,39 @@ public class PersonData {
     this.mobilePhone = mobilePhone;
     return this;
   }
+
   public PersonData withHomePhone(String homePhone) {
     this.homePhone = homePhone;
     return this;
   }
+
   public PersonData withWorkPhone(String workPhone) {
     this.workPhone = workPhone;
     return this;
   }
 
+  public PersonData withAllPhones(String allPhones) {
+    this.allPhones = allPhones;
+    return this;
+  }
+
   public PersonData withEmail(String email) {
     this.email = email;
+    return this;
+  }
+
+  public PersonData withEmail2(String email2) {
+    this.email2 = email2;
+    return this;
+  }
+
+  public PersonData withEmail3(String email3) {
+    this.email3 = email3;
+    return this;
+  }
+
+  public PersonData withAllEmails(String allEmails) {
+    this.allEmails = allEmails;
     return this;
   }
 
@@ -102,8 +154,16 @@ public class PersonData {
     return "PersonData{" +
             "personName='" + personName + '\'' +
             ", personLastName='" + personLastName + '\'' +
+            ", mobilePhone='" + mobilePhone + '\'' +
+            ", homePhone='" + homePhone + '\'' +
+            ", workPhone='" + workPhone + '\'' +
+            ", allPhones='" + allPhones + '\'' +
+            ", email='" + email + '\'' +
+            ", allEmails='" + allEmails + '\'' +
+            ", groupName='" + groupName + '\'' +
+            ", email2='" + email2 + '\'' +
+            ", email3='" + email3 + '\'' +
+            ", address='" + address + '\'' +
             '}';
   }
-
-
 }
