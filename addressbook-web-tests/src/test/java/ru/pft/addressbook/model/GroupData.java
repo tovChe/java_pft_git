@@ -1,12 +1,22 @@
 package ru.pft.addressbook.model;
 
+import com.google.gson.annotations.Expose;
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import java.util.Objects;
 
+@XStreamAlias("group")
 public class GroupData {
 
+  @XStreamOmitField
   public int id = Integer.MAX_VALUE;
+
+  @Expose
   public String textFooter;
+  @Expose
   public String header;
+  @Expose
   public String groupName;
 
   @Override

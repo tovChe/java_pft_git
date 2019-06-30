@@ -1,21 +1,32 @@
 package ru.pft.addressbook.model;
 
+import com.google.gson.annotations.Expose;
+
 import java.io.File;
 import java.util.Objects;
 
 public class PersonData {
   private int id;
+  @Expose
   private String personName;
+  @Expose
   private String personLastName;
+  @Expose
   private String mobilePhone;
+  @Expose
   private String homePhone;
+  @Expose
   private String workPhone;
   private String allPhones;
+  @Expose
   private String email;
   private String allEmails;
   private String groupName;
+  @Expose
   private String email2;
+  @Expose
   private String email3;
+  @Expose
   private String address;
   private File photo;
 
