@@ -7,7 +7,7 @@
     "workPhone": "333",
     "email": "tester@tester.com",
     "email3": "tester3@tester.com",
-    "address": "310000, Город федерального значения, ул. Лениа, д.1"
+    "address": "310000, Город федерального значения, ул. Ленина, д.1"
   },
   {
     "personName": "Tester 1",
@@ -17,7 +17,7 @@
     "workPhone": "333",
     "email": "tester@tester.com",
     "email3": "tester3@tester.com",
-    "address": "310000, Город федерального значения, ул. Лениа, д.1"
+    "address": "310000, Город федерального значения, ул. Ленина, д.1"
   },
   {
     "personName": "Tester 2",
@@ -27,6 +27,6 @@
     "workPhone": "333",
     "email": "tester@tester.com",
     "email3": "tester3@tester.com",
-    "address": "310000, Город федерального значения, ул. Лениа, д.1"
+    "address": "310000, Город федерального значения, ул. Ленина, д.1"
   }
 ]

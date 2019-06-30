@@ -28,6 +28,7 @@ public class PersonData {
   private String email3;
   @Expose
   private String address;
+  @Expose
   private File photo;
 
   public int getId() {

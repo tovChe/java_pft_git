@@ -24,7 +24,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class CreatePerson extends TestBase {
 
   @DataProvider()
-  public Iterator<Object[]> validGroupsFromXml() throws IOException {
+  public Iterator<Object[]> validPersonsFromXml() throws IOException {
 
     BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/persons.xml")));
     String xml = "";
@@ -40,7 +40,7 @@ public class CreatePerson extends TestBase {
   }
 
   @DataProvider()
-  public Iterator<Object[]> validGroupsFromJson() throws IOException {
+  public Iterator<Object[]> validPersonsFromJson() throws IOException {
 
     BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/persons.json")));
     String json = "";
@@ -50,15 +50,15 @@ public class CreatePerson extends TestBase {
       line = reader.readLine();
     }
     Gson gson = new Gson();
-    List<GroupData> persons = gson.fromJson(json, new TypeToken<List<PersonData>>() {
+    List<PersonData> persons = gson.fromJson(json, new TypeToken<List<PersonData>>() {
     }.getType());
     return persons.stream().map((g) -> new Object[]{g}).collect(Collectors.toList()).iterator();
   }
 
 
-  @Test(dataProvider = "validGroupsFromJson")
+  @Test(dataProvider = "validPersonsFromJson")
 
-  public void testCreatePerson() {
+  public void testCreatePerson(PersonData person) {
 
     app.goTo().homePage();
     Persons before = app.person().all();
@@ -68,8 +68,9 @@ public class CreatePerson extends TestBase {
       System.out.println(photo.exists());
       return;
     }
-    PersonData person = new PersonData().withId(addedPerson.getId()).withName("Tester").withLastName("Testovoy")
-            .withMobilePhone("89999999999").withHomePhone("222").withWorkPhone("333").withEmail("test@test.com").withPhoto(photo);
+
+    /*PersonData person = new PersonData().withId(addedPerson.getId()).withName("Tester").withLastName("Testovoy")
+            .withMobilePhone("89999999999").withHomePhone("222").withWorkPhone("333").withEmail("test@test.com").withPhoto(photo);*/
     app.person().create(person, true);
 
     app.goTo().homePage();

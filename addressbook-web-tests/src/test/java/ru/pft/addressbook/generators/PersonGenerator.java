@@ -5,7 +5,6 @@ import com.beust.jcommander.Parameter;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.thoughtworks.xstream.XStream;
-import ru.pft.addressbook.model.GroupData;
 import ru.pft.addressbook.model.PersonData;
 
 import java.io.File;
@@ -30,7 +29,7 @@ public class PersonGenerator {
     JCommander jcommander = new JCommander(generator);
     try {
       jcommander.parse(args);
-    }catch (Exception ex){
+    } catch (Exception ex) {
       jcommander.usage();
     }
     generator.run();
