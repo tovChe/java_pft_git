@@ -10,48 +10,63 @@ import java.util.Objects;
 @Entity
 @Table(name = "addressbook")
 public class PersonData {
+
   @Id
+  @Column(name = "id")
   private int id;
+
   @Expose
   @Column(name = "firstname")
   private String personName;
+
   @Expose
   @Column(name = "lastname")
   private String personLastName;
+
   @Expose
   @Column(name = "mobile")
   @Type(type = "text")
   private String mobilePhone;
+
   @Expose
   @Column(name = "home")
   @Type(type = "text")
   private String homePhone;
+
   @Expose
   @Column(name = "work")
   @Type(type = "text")
   private String workPhone;
+
   @Transient
   private String allPhones;
+
   @Expose
   @Column(name = "email")
   @Type(type = "text")
   private String email;
+
   @Transient
   private String allEmails;
+
   @Transient
   private String groupName;
+
   @Expose
   @Column(name = "email2")
   @Type(type = "text")
   private String email2;
+
   @Expose
   @Type(type = "text")
   @Column(name = "email3")
   private String email3;
+
   @Expose
   @Column(name = "address")
   @Type(type = "text")
   private String address;
+
   @Expose
   @Column(name = "photo")
   @Type(type = "text")

@@ -78,7 +78,7 @@ public class PersonHelper extends HelperBase {
 
   public void modify(PersonData person) {
     initPersonModificationWithId(person.getId());
-    fillPersonForm(new PersonData().withName("Tester Meister").withLastName("Lenin").withMobilePhone("+79189999999").withEmail("tester@yahoooo.com"), false);
+    fillPersonForm(person, false);
     updateForm();
     personCache = null;
   }
@@ -115,7 +115,9 @@ public class PersonHelper extends HelperBase {
       String allPhones = cells.get(5).getText();
       String allEmails = cells.get(4).getText();
       String address = cells.get(3).getText();
-      PersonData person = new PersonData().withId(id).withName(name).withLastName(lastName)
+      PersonData person = new PersonData().withId(id)
+              .withName(name)
+              .withLastName(lastName)
               .withAllEmails(allEmails)
               .withAllPhones(allPhones)
               .withAddress(address);
