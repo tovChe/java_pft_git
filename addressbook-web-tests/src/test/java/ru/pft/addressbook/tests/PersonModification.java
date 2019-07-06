@@ -15,7 +15,7 @@ public class PersonModification extends TestBase {
     app.goTo().homePage();
     if (app.person().all().size() == 0) {
       app.person().create(new PersonData().withName("Tester").withLastName("Testovoy")
-              .withTelNumber("89999999999").withEmail("test@test.com").withGroup("Test group name"), true);
+              .withMobilePhone("89999999999").withEmail("test@test.com").withGroup("Test group name"), true);
     }
   }
   @Test

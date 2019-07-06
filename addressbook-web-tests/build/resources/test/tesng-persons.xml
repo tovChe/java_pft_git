@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Suite2" verbose="1">
+    <test name="Persons">
+        <classes>
+            <class name="ru.pft.addressbook.tests.CreatePerson"/>
+            <class name="ru.pft.addressbook.tests.PersonModification"/>
+            <class name="ru.pft.addressbook.tests.DeletePerson"/>
+        </classes>
+    </test>
+</suite>

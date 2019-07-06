@@ -1,26 +1,37 @@
 package ru.pft.addressbook.model;
 
+import com.google.gson.annotations.Expose;
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import org.hibernate.annotations.Type;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Objects;
 
+@XStreamAlias("group")
+@Entity
+@Table(name = "group_list")
 public class GroupData {
 
+  @XStreamOmitField
+  @Id
+  @Column(name = "group_id")
   public int id = Integer.MAX_VALUE;
-  public String textFooter;
-  public String header;
-  public String groupName;
 
-/*  public GroupData(String header, String textFooter, String withGroup) {
-    this.id = 0;
-    this.header = header;
-    this.textFooter = textFooter;
-    this.withGroup = withGroup;
-  }
-  public GroupData(int id, String header, String textFooter, String withGroup) {
-    this.id = id;
-    this.header = header;
-    this.textFooter = textFooter;
-    this.withGroup = withGroup;
-  }*/
+  @Expose
+  @Column(name = "group_footer")
+  @Type(type = "text")
+  public String textFooter;
+  @Expose
+  @Column(name = "group_header")
+  @Type(type = "text")
+  public String header;
+  @Expose
+  @Column(name = "group_name")
+  public String groupName;
 
   @Override
   public String toString() {
@@ -67,7 +78,7 @@ public class GroupData {
     return this;
   }
 
-  /*public String getTextFooter() {
+  public String getTextFooter() {
     return textFooter;
   }
 
@@ -76,6 +87,6 @@ public class GroupData {
   }
 
   public String getGroupName() {
-    return withGroup;
-  }*/
+    return groupName;
+  }
 }
