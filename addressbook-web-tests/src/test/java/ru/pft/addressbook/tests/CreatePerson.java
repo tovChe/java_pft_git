@@ -68,18 +68,12 @@ public class CreatePerson extends TestBase {
       System.out.println(photo.exists());
       return;
     }
-
-    /*PersonData person = new PersonData().withId(addedPerson.getId()).withName("Tester").withLastName("Testovoy")
-            .withMobilePhone("89999999999").withHomePhone("222").withWorkPhone("333").withEmail("test@test.com").withPhoto(photo);*/
     app.person().create(person, true);
-
     app.goTo().homePage();
     assertThat(app.person().count(), equalTo(before.size() + 1));
     Persons after = app.person().all();
-
     person.withId(after.stream().max(Comparator.comparingInt(o -> o.getId())).get().getId());
     before.add(person);
-    assertThat(after, equalTo(before.withAdded(addedPerson)));
-
+    assertThat(after, equalTo(before.withAdded(person)));
   }
 }
