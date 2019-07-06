@@ -47,6 +47,7 @@ public class PersonGenerator {
   private List<PersonData> generatePersons(int count) {
     List<PersonData> persons = new ArrayList<>(count);
     for (int i = 0; i < count; i++) {
+
       persons.add(new PersonData().withName(String.format("Tester %s", i))
               .withLastName(String.format("Testovoy %s", i))
               .withMobilePhone(String.format("+7(911)", i))

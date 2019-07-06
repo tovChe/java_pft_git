@@ -55,14 +55,14 @@ public class CreatePerson extends TestBase {
     return persons.stream().map((g) -> new Object[]{g}).collect(Collectors.toList()).iterator();
   }
 
-
+  //@Test
   @Test(dataProvider = "validPersonsFromJson")
 
   public void testCreatePerson(PersonData person) {
 
     app.goTo().homePage();
     Persons before = app.person().all();
-    PersonData addedPerson = before.iterator().next();
+    //PersonData addedPerson = before.iterator().next();
     File photo = new File("src/test/resources/tovChe.jpg");
     if (!photo.exists()) {
       System.out.println(photo.exists());
@@ -75,5 +75,13 @@ public class CreatePerson extends TestBase {
     person.withId(after.stream().max(Comparator.comparingInt(o -> o.getId())).get().getId());
     before.add(person);
     assertThat(after, equalTo(before.withAdded(person)));
+  }
+
+  @Test (enabled = false)
+  public void currentDir(){
+    File file = new File("src/test/resources/tovChe.jpg");
+    System.out.println(file);
+    System.out.println(file.getAbsolutePath());
+    System.out.println(file.exists());
   }
 }

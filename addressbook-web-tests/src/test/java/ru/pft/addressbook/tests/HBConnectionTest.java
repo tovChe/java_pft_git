@@ -8,6 +8,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import ru.pft.addressbook.model.GroupData;
+import ru.pft.addressbook.model.PersonData;
 
 import java.util.List;
 
@@ -32,13 +33,24 @@ public class HBConnectionTest {
     }
   }
 
-  @Test
+  @Test (enabled = false)
   public void hbConnectionTest() {
     Session session = sessionFactory.openSession();
     session.beginTransaction();
     List result = session.createQuery("from ru.pft.addressbook.model.GroupData").list();
     for ( GroupData group : (List<GroupData>)result ) {
       System.out.println(group);
+    }
+    session.getTransaction().commit();
+    session.close();
+  }
+  @Test
+  public void hbConnectionTest2() {
+    Session session = sessionFactory.openSession();
+    session.beginTransaction();
+    List result = session.createQuery("from ru.pft.addressbook.model.PersonData").list();
+    for ( PersonData person : (List<PersonData>)result ) {
+      System.out.println(person);
     }
     session.getTransaction().commit();
     session.close();
