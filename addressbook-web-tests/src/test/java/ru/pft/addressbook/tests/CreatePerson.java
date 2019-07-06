@@ -68,6 +68,7 @@ public class CreatePerson extends TestBase {
       System.out.println(photo.exists());
       return;
     }
+    person.withPhoto(photo);
     app.person().create(person, true);
     app.goTo().homePage();
     assertThat(app.person().count(), equalTo(before.size() + 1));
