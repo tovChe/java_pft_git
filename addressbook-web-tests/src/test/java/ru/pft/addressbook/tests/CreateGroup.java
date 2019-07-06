@@ -25,8 +25,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class CreateGroup extends TestBase {
 
-  Logger logger = LoggerFactory.getLogger(CreateGroup.class);
-
   @DataProvider()
   public Iterator<Object[]> validGroupsFromXml() throws IOException {
     //List<Object[]> list = new ArrayList<>();
@@ -64,7 +62,7 @@ public class CreateGroup extends TestBase {
 
   @Test(dataProvider = "validGroupsFromJson")
   public void testCreateGroup(GroupData group) {
-    logger.debug("Start CreateGroup");
+
     app.goTo().groupPage();
     Groups before = app.group().all();
     app.group().create(group);
