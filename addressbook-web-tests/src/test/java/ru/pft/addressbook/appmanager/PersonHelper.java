@@ -34,7 +34,10 @@ public class PersonHelper extends HelperBase {
     attach(By.name("photo"), personData.getPhoto());
 
     if (creation) {
-      new Select(wd.findElement(By.name("new_group")));
+      if (personData.getGroups().size() != 0) {
+        Assert.assertTrue(personData.getGroups().size() == 1);
+        new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(personData.getGroups().iterator().next().getGroupName());
+      }
     } else {
       Assert.assertFalse(isElementPresent(By.name("new_group")));
     }
@@ -60,8 +63,8 @@ public class PersonHelper extends HelperBase {
     click(By.id("MassCB"));
   }
 
-  public void selectPersonByID(String id) {
-    click(By.id(id));
+  public void selectPersonByID(int id) {
+    click(By.xpath(String.format("//*[@id=\"%s\"]",id)));
   }
 
   public boolean isThereAPerson() {
@@ -148,5 +151,40 @@ public class PersonHelper extends HelperBase {
             .withEmail(email).withEmail2(email2).withEmail3(email3)
             .withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work)
             .withAddress(address);
+  }
+
+  public void approvedAddGroup(PersonData personAdd) {
+    wd.findElement(By.tagName("h1")).getText().equals("Groups");
+    Assert.assertTrue(isElementPresent(By.linkText("group page \"" + personAdd.getGroups().iterator().next().getGroupName() +"\"")));
+
+  }
+
+  public void approvedDelGroup(PersonData deletedPerson) {
+    wd.findElement(By.tagName("h1")).getText().equals("Groups");
+    Assert.assertTrue(isElementPresent(By.linkText("group page \"" + deletedPerson.getGroups().iterator().next().getGroupName() +"\"")));
+  }
+
+
+  public void addToGroup(PersonData personAdd) {
+    Assert.assertEquals(personAdd.getGroups().size(), 1);
+    Select groupSelector = new Select(wd.findElement(By.name("to_group")));
+    groupSelector.selectByVisibleText(personAdd.getGroups().iterator().next().getGroupName());
+    select(personAdd);
+    click(By.name("add"));
+    approvedAddGroup(personAdd);
+  }
+
+  public void delFromGroup(PersonData deletedPerson) {
+    Assert.assertEquals(deletedPerson.getGroups().size(), 1);
+    selectPersonByID(deletedPerson.getId());
+    click(By.name("remove"));
+    approvedDelGroup(deletedPerson);
+  }
+
+  public void personGroupPage(PersonData deletedPerson) {
+
+    Select select = new Select(wd.findElement(By.name("group")));
+    select.selectByVisibleText(deletedPerson.getGroups().iterator().next().getGroupName());
+
   }
 }

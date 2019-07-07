@@ -17,8 +17,7 @@ public class DeletePerson extends TestBase {
       app.person().create(new PersonData().withName("Tester")
               .withLastName("Testovoy")
               .withMobilePhone("89999999999")
-              .withEmail("test@test.com")
-              .withGroup("Test group name"), true);
+              .withEmail("test@test.com"), true);
     }
   }
 

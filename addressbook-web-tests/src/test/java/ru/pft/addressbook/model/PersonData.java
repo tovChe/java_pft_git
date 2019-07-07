@@ -5,7 +5,9 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.File;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "addressbook")
@@ -49,9 +51,6 @@ public class PersonData {
   @Transient
   private String allEmails;
 
-  @Transient
-  private String groupName;
-
   @Expose
   @Column(name = "email2")
   @Type(type = "text")
@@ -71,6 +70,10 @@ public class PersonData {
   @Column(name = "photo")
   @Type(type = "text")
   private String photo;
+
+  @ManyToMany(fetch = FetchType.EAGER)
+  @JoinTable(name = "address_in_groups", joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
+  private Set<GroupData> groups = new HashSet<GroupData>();
 
   public int getId() {
     return id;
@@ -121,10 +124,6 @@ public class PersonData {
     return allEmails;
   }
 
-  public String getGroupName() {
-    return groupName;
-  }
-
   public String getAddress() {
     return address;
   }
@@ -153,9 +152,8 @@ public class PersonData {
     return this;
   }
 
-  public PersonData withGroup(String groupName) {
-    this.groupName = groupName;
-    return this;
+  public Groups getGroups() {
+    return new Groups(groups);
   }
 
   public PersonData withMobilePhone(String mobilePhone) {
@@ -216,7 +214,8 @@ public class PersonData {
   @Override
   public String toString() {
     return "PersonData{" +
-            "personName='" + personName + '\'' +
+            "id=" + id +
+            ", personName='" + personName + '\'' +
             ", personLastName='" + personLastName + '\'' +
             ", mobilePhone='" + mobilePhone + '\'' +
             ", homePhone='" + homePhone + '\'' +
@@ -224,10 +223,20 @@ public class PersonData {
             ", allPhones='" + allPhones + '\'' +
             ", email='" + email + '\'' +
             ", allEmails='" + allEmails + '\'' +
-            ", groupName='" + groupName + '\'' +
             ", email2='" + email2 + '\'' +
             ", email3='" + email3 + '\'' +
             ", address='" + address + '\'' +
+            ", photo='" + photo + '\'' +
+            ", groups=" + groups +
             '}';
+  }
+
+  public PersonData inGroup(GroupData group) {
+    groups.add(group);
+    return this;
+  }
+  public PersonData delGroup() {
+    groups.remove(getGroups().iterator().next());
+    return this;
   }
 }

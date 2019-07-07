@@ -61,7 +61,7 @@ public class CreatePerson extends TestBase {
   public void testCreatePerson(PersonData person) {
 
     app.goTo().homePage();
-    Persons before = app.person().all();
+    Persons before = app.db().persons();
     //PersonData addedPerson = before.iterator().next();
     File photo = new File("src/test/resources/tovChe.jpg");
     if (!photo.exists()) {
@@ -69,10 +69,10 @@ public class CreatePerson extends TestBase {
       return;
     }
     person.withPhoto(photo);
-    app.person().create(person, true);
+    app.person().create(person.inGroup(app.db().groups().iterator().next()), true);
     app.goTo().homePage();
     assertThat(app.person().count(), equalTo(before.size() + 1));
-    Persons after = app.person().all();
+    Persons after = app.db().persons();
     person.withId(after.stream().max(Comparator.comparingInt(o -> o.getId())).get().getId());
     before.add(person);
     assertThat(after, equalTo(before.withAdded(person)));

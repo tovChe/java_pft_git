@@ -2,6 +2,8 @@ package ru.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.Select;
+import ru.pft.addressbook.model.PersonData;
 
 public class NavigationHelper extends HelperBase {
 
@@ -15,7 +17,7 @@ public class NavigationHelper extends HelperBase {
 
   public void homePage() {
 
-    if (isElementPresent(By.id("maintable"))){
+    if (isElementPresent(By.id("maintable"))) {
       return;
     }
     click(By.linkText("home")); //#nav > ul:nth-child(1) > li:nth-child(1) > a:nth-child(1)
