@@ -30,6 +30,7 @@ public class DeleteGroup extends TestBase {
     Groups after = app.db().groups();
     before.remove(deletedGroup);
     assertThat(after, equalTo(before.without(deletedGroup)));
+    verifyGroupListUI(); // -DverifyListUI=true в конфигурации запуска
     System.out.println("Group was deleted!!!");
   }
 }

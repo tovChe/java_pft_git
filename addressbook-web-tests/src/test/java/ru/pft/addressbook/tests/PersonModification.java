@@ -16,8 +16,11 @@ public class PersonModification extends TestBase {
   public void preconditions(){
     if (app.db().persons().size() == 0){
       app.goTo().homePage();
-      app.person().create(new PersonData().withName("Tester").withLastName("Testovoy")
-              .withMobilePhone("89999999999").withEmail("test@test.com").withGroup("Test group name"), true);
+      File photo = new File("src/test/resources/tovChe.jpg");
+      app.person().create(new PersonData().withName("Tester")
+              .withLastName("Testovoy")
+              .withMobilePhone("89999999999")
+              .withEmail("test@test.com").withPhoto(photo), true);
     }
    }
   @Test
@@ -48,6 +51,7 @@ public class PersonModification extends TestBase {
     Persons after = app.db().persons();
 
     assertThat(after, equalTo(before.without(modifiedPerson).withAdded(person)));
+    verifyPersonListUI(); // -DverifyListUI=true в конфигурации запуска
     System.out.println("Person is modified!!!");
 
   }

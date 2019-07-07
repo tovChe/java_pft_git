@@ -71,7 +71,8 @@ public class CreateGroup extends TestBase {
 
     assertThat(after, equalTo(before.withAdded(
             group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
-    logger.debug("Stop CreateGroup");
+
+    verifyGroupListUI(); // -DverifyListUI=true в конфигурации запуска
   }
 
 }

@@ -36,6 +36,7 @@ public class DeletePerson extends TestBase {
 
     before.remove(person);
     assertThat(after, equalTo(before.without(deletedPerson)));
+    verifyPersonListUI(); // -DverifyListUI=true в конфигурации запуска
     System.out.println("Person is deleted!");
 
   }

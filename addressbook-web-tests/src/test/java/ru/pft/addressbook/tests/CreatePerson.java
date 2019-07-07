@@ -76,6 +76,7 @@ public class CreatePerson extends TestBase {
     person.withId(after.stream().max(Comparator.comparingInt(o -> o.getId())).get().getId());
     before.add(person);
     assertThat(after, equalTo(before.withAdded(person)));
+    verifyPersonListUI(); // -DverifyListUI=true в конфигурации запуска
   }
 
   @Test (enabled = false)

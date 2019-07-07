@@ -37,6 +37,7 @@ public class GroupModification extends TestBase {
     before.add(group);
     Assert.assertEquals(before, after);
     MatcherAssert.assertThat(after, CoreMatchers.equalTo(before.without(modifiedGroup).withAdded(group)));
+    verifyGroupListUI(); // -DverifyListUI=true в конфигурации запуска
   }
 
 
