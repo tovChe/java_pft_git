@@ -14,6 +14,9 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class PersonDeleteGroup extends TestBase {
 
+  private Persons persons;
+  private Groups groups;
+
   @BeforeMethod
   public void preconditions() {
     if (app.db().persons().size() == 0) {
@@ -37,19 +40,19 @@ public class PersonDeleteGroup extends TestBase {
 
   @Test
   public void testPersonDeleteGroup() {
-    Persons persons = app.db().persons();
-    Groups groups = app.db().groups();
+    persons = app.db().persons();
+    groups = app.db().groups();
+    PersonData personDel = persons.iterator().next();
+    app.goTo().homePage();
+    Groups before = personDel.getGroups();
 
-    Persons before = persons;
-    PersonData personDel = before.iterator().next();
+    //PersonData deletedPerson = personDel.inGroup(groups.iterator().next());
+    app.person().personGroupPage(personDel);
+    app.person().delFromGroup(personDel);
 
-    PersonData deletedPerson = personDel.inGroup(groups.iterator().next());
-    app.person().personGroupPage(deletedPerson);
-    app.person().delFromGroup(deletedPerson);
+    Groups after = personDel.getGroups();
 
-    Persons after = app.db().persons();
-
-    assertThat(before, equalTo(after.without(personDel).withAdded(deletedPerson.delGroup())));
+    assertThat(before, equalTo(after.withAdded(personDel.getGroups().iterator().next())));
 
   }
 }

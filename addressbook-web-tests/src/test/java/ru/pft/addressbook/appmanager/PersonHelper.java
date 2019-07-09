@@ -181,10 +181,10 @@ public class PersonHelper extends HelperBase {
     approvedDelGroup(deletedPerson);
   }
 
-  public void personGroupPage(PersonData deletedPerson) {
+  public void personGroupPage(PersonData personDel) {
 
     Select select = new Select(wd.findElement(By.name("group")));
-    select.selectByVisibleText(deletedPerson.getGroups().iterator().next().getGroupName());
+    select.selectByVisibleText(personDel.getGroups().iterator().next().getGroupName());
 
   }
 }

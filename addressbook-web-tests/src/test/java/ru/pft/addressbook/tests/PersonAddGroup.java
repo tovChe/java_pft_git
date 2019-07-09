@@ -16,6 +16,9 @@ import static org.hamcrest.MatcherAssert.*;
 
 public class PersonAddGroup extends TestBase {
 
+  private Persons person ;
+  private Groups groups;
+
   @BeforeMethod
   public void preconditions() {
     if (app.db().persons().size() == 0) {
@@ -30,20 +33,25 @@ public class PersonAddGroup extends TestBase {
       app.goTo().groupPage();
       app.group().create(new GroupData().withName("Test group name").withHeader("test header").withFooter("test footer"));
     }
+   person = app.db().persons();
+   groups = app.db().groups();
   }
 
   @Test
   public void testPersonAddGroup() {
-    Persons persons = app.db().persons();
-    Groups groups = app.db().groups();
-    Persons before = persons;
-    PersonData personAdd = before.iterator().next();
-    PersonData addedPerson = personAdd.inGroup(groups.iterator().next());
+
+    app.goTo().homePage();
+    PersonData personAdd = person.iterator().next();
+
+    Groups before = groups;
+
     app.person().addToGroup(personAdd);
+    Groups groupsAdd = personAdd.getGroups();
 
-    Persons after = app.db().persons();
+    Groups after = groups;
 
-    assertThat(before, equalTo(after.without(personAdd).withAdded(addedPerson)));
+    assertThat(before.withAdded(groupsAdd.iterator().next()), equalTo(after));
+
 
   }
 }
