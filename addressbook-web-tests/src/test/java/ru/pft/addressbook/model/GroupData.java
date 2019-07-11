@@ -32,7 +32,7 @@ public class GroupData {
   @Column(name = "group_name")
   public String groupName;
 
-  @ManyToMany(mappedBy = "groups")
+  @ManyToMany(mappedBy = "groups", fetch = FetchType.EAGER)
   private Set<PersonData> persons = new HashSet<PersonData>();
 
   public Persons getPersons() {

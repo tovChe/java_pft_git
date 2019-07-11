@@ -13,6 +13,12 @@ import ru.pft.addressbook.model.Persons;
 
 import java.util.List;
 
+/**
+ * Класс для работы с БД.
+ *
+ * @author tovChe
+ * @version 1.5
+ */
 public class DbHelper {
 
   private final SessionFactory sessionFactory;
@@ -25,6 +31,11 @@ public class DbHelper {
     sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
   }
 
+  /**
+   * <p>Получаем список групп из БД.</p>
+   *
+   * @return result - список групп
+   */
   public Groups groups() {
     Session session = sessionFactory.openSession();
     session.beginTransaction();
@@ -37,6 +48,11 @@ public class DbHelper {
     return new Groups(result);
   }
 
+  /**
+   * <p>Получаем список контактов из БД.</p>
+   *
+   * @return result - список контактов с ограничением deprecated
+   */
   public Persons persons() {
     Session session = sessionFactory.openSession();
     session.beginTransaction();
@@ -44,6 +60,30 @@ public class DbHelper {
     session.getTransaction().commit();
     session.close();
     return new Persons(result);
+  }
+
+  /**
+   * <p>Обновляет список групп.</p>
+   *
+   * @param groups Принимает группу в которую был добавлен контакт
+   */
+  public void groupsNextQuery(GroupData groups) {
+    Session session = sessionFactory.openSession();
+    session.refresh(groups); // обновление ранее полученного списка групп
+    // Также возможно сделать так же как public Groups groups()
+    session.close();
+  }
+
+  /**
+   * <p>Обновляет список контактов.</p>
+   *
+   * @param persons Принимает контакт добавленный в группу
+   */
+  public void personNextQuery(PersonData persons) {
+    Session session = sessionFactory.openSession();
+    session.refresh(persons); // обновление ранее полученного списка контактов
+    // Также возможно сделать  так же как public Persons persons()
+    session.close();
   }
 }
 

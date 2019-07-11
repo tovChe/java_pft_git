@@ -9,7 +9,7 @@ import ru.pft.addressbook.model.Persons;
 
 import java.io.File;
 
-import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class PersonDeleteGroup extends TestBase {
@@ -43,16 +43,23 @@ public class PersonDeleteGroup extends TestBase {
     persons = app.db().persons();
     groups = app.db().groups();
     PersonData personDel = persons.iterator().next();
-    app.goTo().homePage();
-    Groups before = personDel.getGroups();
+    GroupData groupDel = groups.iterator().next();
 
-    //PersonData deletedPerson = personDel.inGroup(groups.iterator().next());
+    app.goTo().homePage();
+
     app.person().personGroupPage(personDel);
     app.person().delFromGroup(personDel);
 
-    Groups after = personDel.getGroups();
+    app.db().personNextQuery(personDel);
+    app.db().groupsNextQuery(groupDel);
 
-    assertThat(before, equalTo(after.withAdded(personDel.getGroups().iterator().next())));
+    assertThat(personDel.getGroups(), not(groupDel));
+    assertThat(groupDel.getPersons(), not(personDel));
+    
+
+
+
+
 
   }
 }
