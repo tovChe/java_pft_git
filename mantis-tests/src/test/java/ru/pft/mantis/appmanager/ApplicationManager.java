@@ -14,45 +14,60 @@ import java.util.concurrent.TimeUnit;
 
 public class ApplicationManager {
 
-  private final Properties properties;
-  WebDriver wd;
+	private final Properties properties;
+	private WebDriver wd;
 
-  private String browser;
-  
+	private String browser;
+	private RegistrationHelper registrtationHelper;
 
-  public ApplicationManager(String browser) {
-    this.browser = browser;
-    properties = new Properties();
-  }
+	public ApplicationManager(String browser) {
+		this.browser = browser;
+		properties = new Properties();
+	}
 
-  public void init() throws IOException {
-    String target = System.getProperty("target", "local");
-    properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
+	public void init() throws IOException {
+		String target = System.getProperty("target", "local");
+		properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
+	}
 
-    if (browser.equals(BrowserType.FIREFOX)) {
-      wd = new FirefoxDriver();
-    } else if (browser.equals(BrowserType.CHROME)) {
-      wd = new ChromeDriver();
-    } else if (browser.equals(BrowserType.IE)) {
-      wd = new InternetExplorerDriver();
-    } else {
-      System.out.println("Use for tests only IE, Chrome, Firefox");
-    }
+	public void stop() {
+		if (wd != null) {
+			wd.quit();
+		}
+	}
 
-    wd.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-    wd.get(properties.getProperty("web.baseUrl"));
+	public HttpSession newSession() {
+		return new HttpSession(this);
+	}
 
-  }
+	public String getProperty(String key) {
+		return properties.getProperty(key);
+	}
 
-  public void stop() {
-    wd.quit();
-  }
+	public RegistrationHelper registration() {
+		if (registrtationHelper == null) {
+			registrtationHelper =  new RegistrationHelper(this);
+		}
+		return registrtationHelper;
+	}
 
-  public HttpSession newSession() {
-    return new HttpSession(this);
-  }
+	public WebDriver getDriver() {
+		if (wd == null) {
+			if (browser.equals(BrowserType.FIREFOX)) {
+				wd = new FirefoxDriver();
+			} else if (browser.equals(BrowserType.CHROME)) {
+				wd = new ChromeDriver();
+			} else if (browser.equals(BrowserType.IE)) {
+				wd = new InternetExplorerDriver();
+			} else {
+				System.out.println("Use for tests only IE, Chrome, Firefox");
+			}
 
-  public String getProperty(String key) {
-    return properties.getProperty(key);
-  }
+			wd.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+			wd.get(properties.getProperty("web.baseUrl"));
+
+		}
+		return wd;
+	}
+
 }
