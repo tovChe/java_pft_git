@@ -55,7 +55,7 @@ public class PersonDeleteGroup extends TestBase {
 
     assertThat(personDel.getGroups(), not(groupDel));
     assertThat(groupDel.getPersons(), not(personDel));
-    
+
 
 
 
