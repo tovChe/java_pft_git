@@ -2,9 +2,11 @@ package ru.pft.mantis.appmanager;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.BrowserType;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.io.File;
 import java.io.FileReader;
@@ -22,6 +24,9 @@ public class ApplicationManager {
 	private FtpHelper ftp;
 	private MailHelper mailHelper;
 	private JamesHelper jamesHelper;
+	private AdminHelper adminHelper;
+	private DbHelper dbHelper;
+	private NavigationHelper navHelper;
 
 	public ApplicationManager(String browser) {
 		this.browser = browser;
@@ -67,6 +72,7 @@ public class ApplicationManager {
 				wd = new FirefoxDriver();
 			} else if (browser.equals(BrowserType.CHROME)) {
 				wd = new ChromeDriver();
+				wd.manage().window().maximize();
 			} else if (browser.equals(BrowserType.IE)) {
 				wd = new InternetExplorerDriver();
 			} else {
@@ -92,5 +98,22 @@ public class ApplicationManager {
 		}
 		return jamesHelper;
 	}
-	
+	public AdminHelper admin() {
+		if(adminHelper == null) {
+			adminHelper = new AdminHelper(this);
+		}
+		return adminHelper;
+	}
+	public DbHelper db() {
+		if(dbHelper == null) {
+			dbHelper = new DbHelper(this);
+		}
+		return dbHelper;
+	}
+	public NavigationHelper goTo() {
+		if(navHelper == null) {
+			navHelper = new NavigationHelper(this);
+		}
+		return navHelper;
+	}
 }
