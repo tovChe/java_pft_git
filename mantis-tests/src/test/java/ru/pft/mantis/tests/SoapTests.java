@@ -1,6 +1,7 @@
 package ru.pft.mantis.tests;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 import ru.pft.mantis.model.Issue;
 import ru.pft.mantis.model.Project;
@@ -25,6 +26,7 @@ public class SoapTests extends TestBase {
 
   @Test
   public void createIssue() throws RemoteException, ServiceException, MalformedURLException {
+    skipIfNotFixed(0000001);
     Set<Project> projects = app.soap().getProjects();
     Issue issue = new Issue().withSummary("Test summary").withDescription("Test description").withProject(projects.iterator().next());
     Issue created = app.soap().addIssue(issue);

@@ -1,5 +1,7 @@
 package ru.pft.mantis.model;
 
+import java.math.BigInteger;
+
 public class Issue {
 
   private int id;
