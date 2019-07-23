@@ -17,7 +17,6 @@ dependencies {
     implementation 'org.hibernate:hibernate-core:5.4.3.Final'
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'mysql:mysql-connector-java:8.0.16'
-    implementation 'biz.futureware.mantis:mantis-axis-soap-client:1.2.19'
     /* implementation 'com.beust:jcommander:1.72'
      implementation 'com.thoughtworks.xstream:xstream:1.4.11.1'
      implementation 'com.google.code.gson:gson:2.8.5'
@@ -40,4 +39,22 @@ test {
     if (project.hasProperty('verifyListUI')) {
         systemProperty 'verifyListUI', "${verifyListUI}"
     }
+}
+buildscript{
+    repositories{
+        jcenter()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'no.nils:wsdl2java:0.10'
+    }
+}
+apply plugin: 'no.nils.wsdl2java'
+
+wsdl2java {
+    generatedWsdlDir = file("src/main/java")  // target directory for generated source coude
+    wsdlDir = file("src/main/resources") // define to support incremental build
+    wsdlsToGenerate = [   //  2d-array of wsdls and cxf-parameters
+                          ['src/main/resources/geoip.wsdl'],
+    ]
 }
