@@ -6,6 +6,8 @@
       <module name="addressbook-web-tests.test" target="12" />
       <module name="mantis-tests.main" target="12" />
       <module name="mantis-tests.test" target="12" />
+      <module name="rest.main" target="12" />
+      <module name="rest.test" target="12" />
       <module name="sandbox.main" target="12" />
       <module name="sandbox.test" target="12" />
       <module name="soap.main" target="12" />
