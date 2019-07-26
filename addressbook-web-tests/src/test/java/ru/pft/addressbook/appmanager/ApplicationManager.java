@@ -46,15 +46,12 @@ public class ApplicationManager {
         wd = new ChromeDriver();
       } else if (browser.equals(BrowserType.IE)) {
         wd = new InternetExplorerDriver();
-      } else {
-        System.out.println("Use for tests only IE, Chrome, Firefox");
       }
     } else {
       DesiredCapabilities capability = new DesiredCapabilities();
       capability.setBrowserName(browser);
       wd = new RemoteWebDriver(new URL(properties.getProperty("selenium.server")), capability);
     }
-
 
     wd.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     wd.get(properties.getProperty("web.baseUrl"));
